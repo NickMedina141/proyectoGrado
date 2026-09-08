@@ -1,0 +1,39 @@
+meta {
+  name: 3. Refrescar Token
+  type: http
+  seq: 3
+}
+post {
+  url: http://localhost:8080/api/auth/refresh
+  body: none
+  auth: none
+}
+headers {
+  Authorization: Bearer <TU_TOKEN_VIEJO_AQUI>
+}
+docs {
+  ### Refrescar Token
+  **EndPoint:** `http://localhost:8080/api/auth/refresh`
+  
+  **Descripción del EndPoint:**
+  Renueva un token JWT que está por expirar, manteniendo la sesión activa.
+  
+  **Método HTTP:** POST
+  
+  **Headers requeridos:** 
+  - Authorization: Bearer <TU_TOKEN_VIEJO>
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "token": "eyNldm9fdG9rZW4uLi4"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Token inválido o expirado"
+  }
+  ```
+}

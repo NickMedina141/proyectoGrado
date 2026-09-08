@@ -1,0 +1,33 @@
+meta {
+  name: 4. Cerrar Sala Examen
+  type: http
+  seq: 4
+}
+post {
+  url: http://localhost:8080/api/examenes/ID_DEL_EXAMEN/cerrar
+  body: none
+  auth: none
+}
+docs {
+  ### Cerrar Sala Examen
+  **EndPoint:** `http://localhost:8080/api/examenes/{codigoExamen}/cerrar`
+  
+  **Descripción del EndPoint:**
+  Finaliza el acceso al examen para todos los estudiantes.
+  
+  **Método HTTP:** POST
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "message": "Sala cerrada exitosamente"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "El examen ya se encontraba cerrado"
+  }
+  ```
+}

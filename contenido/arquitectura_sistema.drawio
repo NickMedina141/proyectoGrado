@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2023-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="21.0.0" type="device">
+  <diagram id="arch_1" name="Arquitectura Sistema">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ZONA ESTUDIANTE -->
+        <mxCell id="StudentPC" value="&lt;b style=&quot;font-size: 16px;&quot;&gt;💻 Computador del Estudiante&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#9673a6;startSize=30;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="150" width="280" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="AppSupervision" value="&lt;b&gt;AppSupervision (Frontend)&lt;/b&gt;&lt;hr&gt;Interfaz PyQt6&lt;br&gt;Navegador Seguro (Kiosco)&lt;br&gt;Captura de Webcam y Teclado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=center;" vertex="1" parent="StudentPC">
+          <mxGeometry x="25" y="60" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FastAPI" value="&lt;b&gt;Motor IA (Sidecar Local)&lt;/b&gt;&lt;hr&gt;Servidor FastAPI (127.0.0.1)&lt;br&gt;YOLOv8 + MediaPipe" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;align=center;" vertex="1" parent="StudentPC">
+          <mxGeometry x="25" y="200" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_local" value="Peticiones HTTP (Imágenes)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;endArrow=classic;endFill=1;" edge="1" parent="StudentPC" source="AppSupervision" target="FastAPI">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ZONA PROFESOR -->
+        <mxCell id="TeacherPC" value="&lt;b style=&quot;font-size: 16px;&quot;&gt;💻 Computador del Profesor&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#d79b00;startSize=30;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="150" width="280" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="AppProfesor" value="&lt;b&gt;AppProfesor (Frontend)&lt;/b&gt;&lt;hr&gt;Interfaz PyQt6&lt;br&gt;Dashboard de Control&lt;br&gt;Visualizador de Streaming" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=center;" vertex="1" parent="TeacherPC">
+          <mxGeometry x="25" y="60" width="230" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ZONA NUBE / SERVIDOR -->
+        <mxCell id="Cloud" value="&lt;b style=&quot;font-size: 16px;&quot;&gt;☁️ Servidor (Backend Central)&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontColor=#333333;strokeColor=#6c8ebf;startSize=30;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="50" width="300" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="SpringBoot" value="&lt;b&gt;API REST (AppSegurity)&lt;/b&gt;&lt;hr&gt;Java Spring Boot 3&lt;br&gt;Autenticación JWT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;" vertex="1" parent="Cloud">
+          <mxGeometry x="35" y="60" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="WebSockets" value="&lt;b&gt;Túnel de Eventos&lt;/b&gt;&lt;hr&gt;Spring STOMP WebSockets&lt;br&gt;(Streaming y Comandos)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;align=center;" vertex="1" parent="Cloud">
+          <mxGeometry x="35" y="180" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="MongoDB" value="&lt;b&gt;Base de Datos&lt;/b&gt;&lt;br&gt;MongoDB (NoSQL)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;align=center;" vertex="1" parent="Cloud">
+          <mxGeometry x="85" y="300" width="130" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- CONEXIONES NUBE INTERNAS -->
+        <mxCell id="edge_spring_mongo" edge="1" parent="Cloud" source="SpringBoot" target="MongoDB">
+          <mxGeometry relative="1" as="geometry">
+             <mxPoint as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ws_mongo" edge="1" parent="Cloud" source="WebSockets" target="MongoDB">
+          <mxGeometry relative="1" as="geometry">
+             <mxPoint as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CONEXIONES GLOBALES -->
+        
+        <!-- REST: Estudiante -> API -->
+        <mxCell id="edge_est_spring" value="HTTP / JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="AppSupervision" target="SpringBoot">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="180" y="80" /><mxPoint x="550" y="80" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- REST: Profesor -> API -->
+        <mxCell id="edge_prof_spring" value="HTTP / JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="AppProfesor" target="SpringBoot">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="920" y="80" /><mxPoint x="550" y="80" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- WEBSOCKETS: Estudiante -> STOMP -->
+        <mxCell id="edge_est_ws" value="WSS / Base64 Video" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#10739e;endArrow=classic;endFill=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="AppSupervision" target="WebSockets">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="360" y="250" /><mxPoint x="360" y="265" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- WEBSOCKETS: Profesor -> STOMP -->
+        <mxCell id="edge_prof_ws" value="WSS / Base64 Video" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#10739e;endArrow=classic;endFill=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="AppProfesor" target="WebSockets">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="750" y="250" /><mxPoint x="750" y="265" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

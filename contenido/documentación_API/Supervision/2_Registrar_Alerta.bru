@@ -1,0 +1,62 @@
+meta {
+  name: 2. Registrar Alerta
+  type: http
+  seq: 2
+}
+post {
+  url: http://localhost:8080/api/supervision/ID_DE_SESION/alerta
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "claseAlerta": "VISION",
+    "horaCaptura": "2026-08-30T10:15:00",
+    "nivelRiesgo": "ALTO",
+    "detalles": {
+      "tipoEvidencia": "MULTIPLE_ROSTROS",
+      "cantidadRostros": 2,
+      "confianzaIa": 0.95
+    }
+  }
+}
+docs {
+  ### Registrar Alerta de Fraude
+  **EndPoint:** `http://localhost:8080/api/supervision/{sesionId}/alerta`
+  
+  **Descripción del EndPoint:**
+  Guarda en base de datos una alerta de trampa detectada por la IA Local.
+  
+  **Método HTTP:** POST
+  
+  **Headers requeridos:** 
+  - Content-Type: application/json
+  
+  **Cuerpo de la Petición:**
+  ```json
+  {
+    "claseAlerta": "VISION",
+    "horaCaptura": "2026-08-30T10:15:00",
+    "nivelRiesgo": "ALTO",
+    "detalles": {
+      "tipoEvidencia": "MULTIPLE_ROSTROS",
+      "cantidadRostros": 2,
+      "confianzaIa": 0.95
+    }
+  }
+  ```
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "message": "Alerta guardada exitosamente"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Error al registrar la alerta: ID de sesión no existe"
+  }
+  ```
+}

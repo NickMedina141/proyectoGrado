@@ -1,0 +1,64 @@
+meta {
+  name: 1. Iniciar Sesion Supervision
+  type: http
+  seq: 1
+}
+post {
+  url: http://localhost:8080/api/supervision/iniciar
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "estudianteId": "65b9c1f2",
+    "pinExamen": "123456",
+    "conexion": {
+      "ipEstudiante": "192.168.1.5",
+      "sistemaOperativo": "Windows 11",
+      "vpnDetectada": false,
+      "protocoloConexion": "TCP/IP"
+    }
+  }
+}
+docs {
+  ### Iniciar Sesión Supervisión
+  **EndPoint:** `http://localhost:8080/api/supervision/iniciar`
+  
+  **Descripción del EndPoint:**
+  Registra el ingreso del estudiante a la sala, validando el PIN e información de red.
+  
+  **Método HTTP:** POST
+  
+  **Headers requeridos:** 
+  - Content-Type: application/json
+  
+  **Cuerpo de la Petición:**
+  ```json
+  {
+    "estudianteId": "65b9c1f2",
+    "pinExamen": "123456",
+    "conexion": {
+      "ipEstudiante": "192.168.1.5",
+      "sistemaOperativo": "Windows 11",
+      "vpnDetectada": false,
+      "protocoloConexion": "TCP/IP"
+    }
+  }
+  ```
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "sesionId": "88c9d0e1",
+    "examenId": "77a8b9c0",
+    "estadoSesion": "ACTIVA"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "PIN incorrecto o Sala cerrada"
+  }
+  ```
+}

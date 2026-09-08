@@ -1,0 +1,234 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
+  <diagram id="diagram_1" name="Esquema MongoDB">
+    <mxGraphModel dx="3575" dy="2704" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Profesor" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;Profesor&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;_id:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;ObjectId&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;codigo_profesor:&amp;nbsp; &amp;nbsp; &amp;nbsp;String&lt;br&gt;nombre:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;apellidos:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;cedula:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;email_institucional: String&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;password_hash:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;String (Argon2)&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;materias:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Array&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;auditoria:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Object&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;seguridad_jwt:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Object&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="200" width="270" x="110" y="15" as="geometry" />
+        </mxCell>
+        <mxCell id="Estudiante" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;Estudiante&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;_id: &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; ObjectId&lt;br&gt;estudiante_id:&amp;nbsp; &amp;nbsp; &amp;nbsp; String&lt;br&gt;nombre:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;String&lt;br&gt;apellido:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;email:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;cedula:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;password_hash:&amp;nbsp; &amp;nbsp; &amp;nbsp; String (Argon2)&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;estado:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Enum&lt;br&gt;materias_inscritas: Array&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;biometria_facial:&amp;nbsp; &amp;nbsp;Array&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;auditoria:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Object&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;seguridad_jwt:&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Object&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="230" width="260" x="480" as="geometry" />
+        </mxCell>
+        <mxCell id="Examen" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;Examenes&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;_id:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; ObjectId&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;codigo_examen:&amp;nbsp; &amp;nbsp; String&lt;br&gt;&lt;font color=&quot;#ff0000&quot;&gt;profesor_id&lt;/font&gt;:&amp;nbsp; &amp;nbsp; &amp;nbsp; ObjectId&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;moodle_course_id: String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;moodle_quiz_id:&amp;nbsp; &amp;nbsp;String&lt;br&gt;materia_codigo:&amp;nbsp; &amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;control_acceso:&amp;nbsp; &amp;nbsp;Object&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;fecha_examen:&amp;nbsp; &amp;nbsp; &amp;nbsp;Object&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;configuración:&amp;nbsp; &amp;nbsp; Object&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="220" x="120" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="Sesion" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;SesionSupervision&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;_id: &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp; &amp;nbsp; ObjectId&lt;br&gt;&lt;font color=&quot;#ff0000&quot;&gt;examen_Id&lt;/font&gt;:&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp; &amp;nbsp; ObjectId&lt;br&gt;&lt;font color=&quot;#ff0000&quot;&gt;estudiante_Id&lt;/font&gt;:&amp;nbsp; &amp;nbsp; &amp;nbsp; ObjectId&lt;br&gt;estadoSesion:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Enum(String)&lt;br&gt;conexion:&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp; &amp;nbsp; Object&lt;br&gt;analisis_global_ia: Object&lt;br&gt;reporteFinal:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Object&lt;br&gt;Proceso_apelación:&amp;nbsp; Object&lt;/div&gt;" vertex="1">
+          <mxGeometry height="170" width="250" x="480" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="Alerta" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;AlertaEvidencia&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;_id:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; ObjectId&lt;br&gt;&lt;font color=&quot;#ff0000&quot;&gt;sesion_id&lt;/font&gt;:&amp;nbsp; &amp;nbsp; ObjectId&lt;br&gt;clase_alerta: Enum(String)&lt;br&gt;hora_captura: LocalDateTime&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;nivel_riesgo: Enum(String)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="270" x="480" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="AlertaVision" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;dashed=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;AlertaVision&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;tipo_evidencia:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Enum(String)&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;cantidad_rostros:&amp;nbsp; &amp;nbsp; &amp;nbsp;Int&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;objeto_detectado:&amp;nbsp; &amp;nbsp; &amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;confianza_ia:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Double&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;url_webcam:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;url_captura_pantalla: String&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="250" x="110" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="AlertaAudio" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;dashed=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;AlertaAudio&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;transcripcion:&amp;nbsp; &amp;nbsp; String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;voces_detectadas: Int&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;confianza_voz:&amp;nbsp; &amp;nbsp; Double&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;url_audio:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; String&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="260" x="385" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="AlertaProceso" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;dashed=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;AlertaProceso&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;pid_proceso:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Int&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;nombre_proceso:&amp;nbsp; &amp;nbsp; String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;categoria_proceso: Enum(String)&lt;br&gt;accion_tomada:&amp;nbsp; &amp;nbsp; &amp;nbsp;Enum(String)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="250" x="670" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" edge="1" parent="1" source="Examen" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#666666;" target="Profesor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" edge="1" parent="1" source="Sesion" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#666666;" target="Examen">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" edge="1" parent="1" source="Sesion" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#666666;" target="Estudiante">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4" edge="1" parent="1" source="Alerta" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#666666;" target="Sesion">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_vision" edge="1" parent="1" source="AlertaVision" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;strokeWidth=2;strokeColor=#b85450;endArrow=block;endFill=0;dashed=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="Alerta">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_audio" edge="1" parent="1" source="AlertaAudio" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;strokeWidth=2;strokeColor=#b85450;endArrow=block;endFill=0;dashed=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="Alerta">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="760" />
+              <mxPoint x="615" y="760" />
+            </Array>
+            <mxPoint x="610" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_proceso" edge="1" parent="1" source="AlertaProceso" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;strokeWidth=2;strokeColor=#b85450;endArrow=block;endFill=0;dashed=1;entryX=0.671;entryY=1.004;entryDx=0;entryDy=0;entryPerimeter=0;" target="Alerta">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="661.72" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-1" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;dashed=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;AlertaTeclado&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;combinacion_teclas: String&lt;br&gt;patron_sospechoso:&amp;nbsp; String&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="220" x="950" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-4" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.837;entryY=1.025;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#b85450;endArrow=block;endFill=0;dashed=1;entryPerimeter=0;" target="Alerta">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1060" y="760" />
+              <mxPoint x="840" y="760" />
+              <mxPoint x="840" y="730" />
+              <mxPoint x="706" y="730" />
+            </Array>
+            <mxPoint x="887" y="750" as="sourcePoint" />
+            <mxPoint x="840" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-5" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;dashed=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;Control acceso&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align: left; font-family: monospace;&quot;&gt;pin_sesion: String&lt;/div&gt;&lt;div style=&quot;text-align: left; font-family: monospace;&quot;&gt;estado_pin: Enum(String)&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="-330" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-7" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=2;strokeColor=#b46504;endArrow=block;endFill=0;dashed=1;fillColor=#fad7ac;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="Examen">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-320" y="585" as="sourcePoint" />
+            <mxPoint y="385" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-8" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;dashed=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;Fecha Examen&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align: left; font-family: monospace;&quot;&gt;creacion: LocalDateTime&lt;/div&gt;&lt;div style=&quot;text-align: left; font-family: monospace;&quot;&gt;inicio:&amp;nbsp; &amp;nbsp;LocalDateTime&lt;/div&gt;&lt;div style=&quot;text-align: left; font-family: monospace;&quot;&gt;fin:&amp;nbsp; &amp;nbsp; &amp;nbsp; LocalDateTime&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="-330" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-9" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.016;exitY=0.609;exitDx=0;exitDy=0;strokeWidth=2;strokeColor=#b46504;endArrow=block;endFill=0;dashed=1;fillColor=#fad7ac;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitPerimeter=0;" target="Examen">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-126.8" y="420" />
+              <mxPoint y="420" />
+              <mxPoint y="415" />
+            </Array>
+            <mxPoint x="-50" y="540" as="sourcePoint" />
+            <mxPoint x="190" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-10" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;dashed=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;Configuracion&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align: left; font-family: monospace;&quot;&gt;sensibilidad_ia:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Enum(String)&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;duracion_maxima_examen: Int&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;permitir_reintentos:&amp;nbsp; &amp;nbsp; Int&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;procesos_permitidos:&amp;nbsp; &amp;nbsp; Array&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;urls_permitidas:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Array&lt;/div&gt;" vertex="1">
+          <mxGeometry height="135" width="270" x="-400" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-12" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#b46504;endArrow=block;endFill=0;dashed=1;fillColor=#fad7ac;entryX=0;entryY=0.75;entryDx=0;entryDy=0;exitX=1.001;exitY=0.578;exitDx=0;exitDy=0;exitPerimeter=0;" target="Examen">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-110" y="560" as="sourcePoint" />
+            <mxPoint x="140" y="643" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-13" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;dashed=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;Conexion&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;ip_ estudiante:&amp;nbsp; &amp;nbsp; &amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;sistema_operativo:&amp;nbsp; String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;vpn_detectada: &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp; &amp;nbsp; Boolean&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;protocolo_conexion: String&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="205" x="1010" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-14" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;dashed=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;Reporte final&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;veredicto_docente: String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;url_pdf_reporte:&amp;nbsp; &amp;nbsp;String&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="985" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-15" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;dashed=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;Analisis global IA&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;resumen_detallado:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;riesgo_global_calculado:&amp;nbsp; Enum&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;puntaje_riesgo_calculado: Int&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;modelo_ia_utilizado:&amp;nbsp; &amp;nbsp; &amp;nbsp; String&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="250" x="980" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-16" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;dashed=1;" value="&lt;b style=&quot;font-size:14px&quot;&gt;Proceso apelacion&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;apelacion_solicitada: Enum(String)&lt;br&gt;fecha_solicitud:&amp;nbsp; &amp;nbsp; &amp;nbsp; LocalDateTime&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;argumento_estudiante: String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;estado_apelacion:&amp;nbsp; &amp;nbsp; &amp;nbsp;Enum(String)&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;resolucion_comite:&amp;nbsp; &amp;nbsp; String&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="270" x="970" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-20" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-16" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=-0.006;exitY=0.561;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#56517e;endArrow=block;endFill=0;dashed=1;fillColor=#d0cee2;exitPerimeter=0;" target="Sesion">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="920" y="608.5" />
+              <mxPoint x="920" y="510" />
+              <mxPoint x="820" y="510" />
+              <mxPoint x="820" y="432.5" />
+            </Array>
+            <mxPoint x="810" y="540" as="sourcePoint" />
+            <mxPoint x="925" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-21" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1.008;entryY=0.186;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#56517e;endArrow=block;endFill=0;dashed=1;fillColor=#d0cee2;entryPerimeter=0;" target="Sesion">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="135" />
+              <mxPoint x="820" y="336.6" />
+            </Array>
+            <mxPoint x="795" y="180" as="sourcePoint" />
+            <mxPoint x="910" y="90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-22" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.998;entryY=0.322;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#56517e;endArrow=block;endFill=0;dashed=1;fillColor=#d0cee2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryPerimeter=0;" target="Sesion">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="305" />
+              <mxPoint x="925" y="359.7" />
+            </Array>
+            <mxPoint x="810" y="300" as="sourcePoint" />
+            <mxPoint x="925" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-23" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=2;strokeColor=#56517e;endArrow=block;endFill=0;dashed=1;fillColor=#d0cee2;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="Sesion">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="890" y="440" />
+              <mxPoint x="890" y="390" />
+            </Array>
+            <mxPoint x="823" y="380" as="sourcePoint" />
+            <mxPoint x="760" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-25" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;dashed=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Biometria facial&lt;/b&gt;&lt;/span&gt;&lt;br&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;vector_rostro:&amp;nbsp; &amp;nbsp; &amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;url_foto_registro: String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;modelo_ia:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;dimension:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Int&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="205" x="790" y="-340" as="geometry" />
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-26" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;rounded=1;dashed=1;fillColor=#bac8d3;strokeColor=#23445d;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Auditoria&lt;/b&gt;&lt;/span&gt;&lt;br&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;fecha_registro:&amp;nbsp; &amp;nbsp; &amp;nbsp; LocalDateTime&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;ultimo_acceso:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;LocalDateTime&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;fecha_actualizacion: LocalDateTime&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="250" x="80" y="-335" as="geometry" />
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-27" parent="1" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;rounded=1;dashed=1;fillColor=#bac8d3;strokeColor=#23445d;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Seguridad jwt&lt;/b&gt;&lt;/span&gt;&lt;br&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;refresh_tokens_activos:&amp;nbsp; Array&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;ultimo_cambio_password:&amp;nbsp; LocalDateTime&lt;/div&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;intentos_fallidos_login: Int&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="280" x="420" y="-340" as="geometry" />
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-28" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-25" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#82b366;endArrow=block;endFill=0;dashed=1;fillColor=#d5e8d4;gradientColor=#97d077;" target="Estudiante">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="870" y="-285" />
+              <mxPoint x="870" y="-60" />
+              <mxPoint x="675" y="-60" />
+            </Array>
+            <mxPoint x="798" y="-110" as="sourcePoint" />
+            <mxPoint x="520" y="92" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-30" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-27" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#82b366;endArrow=block;endFill=0;dashed=1;fillColor=#d5e8d4;gradientColor=#97d077;" target="Estudiante">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="-240" />
+              <mxPoint x="570" y="-120" />
+              <mxPoint x="610" y="-120" />
+            </Array>
+            <mxPoint x="515" y="-120" as="sourcePoint" />
+            <mxPoint x="400" y="165" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-32" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-26" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#82b366;endArrow=block;endFill=0;dashed=1;fillColor=#d5e8d4;gradientColor=#97d077;exitX=0.578;exitY=0.978;exitDx=0;exitDy=0;exitPerimeter=0;" target="Estudiante">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="-237.2" />
+              <mxPoint x="220" y="-145" />
+              <mxPoint x="330" y="-145" />
+              <mxPoint x="330" y="-80" />
+              <mxPoint x="545" y="-80" />
+            </Array>
+            <mxPoint x="220" y="-230" as="sourcePoint" />
+            <mxPoint x="330" y="-25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-33" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-26" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeWidth=2;strokeColor=#10739e;endArrow=block;endFill=0;dashed=1;fillColor=#b1ddf0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="205" y="-75" />
+              <mxPoint x="240" y="-75" />
+              <mxPoint x="240" y="-20" />
+              <mxPoint x="245" y="-20" />
+            </Array>
+            <mxPoint x="130" y="-190" as="sourcePoint" />
+            <mxPoint x="245" y="15" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QXPEg8v6QN7KTmkjDeVt-34" edge="1" parent="1" source="QXPEg8v6QN7KTmkjDeVt-27" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeWidth=2;strokeColor=#10739e;endArrow=block;endFill=0;dashed=1;fillColor=#b1ddf0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="Profesor">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="-190" />
+              <mxPoint x="350" y="-190" />
+              <mxPoint x="350" y="-20" />
+              <mxPoint x="312.5" y="-20" />
+            </Array>
+            <mxPoint x="410" y="-160" as="sourcePoint" />
+            <mxPoint x="450" y="90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

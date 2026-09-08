@@ -1,0 +1,50 @@
+﻿@startuml
+autonumber
+skinparam sequence {
+    ParticipantBackgroundColor #e1d5e7
+    ParticipantBorderColor #9673a6
+    ActorBackgroundColor #f8cecc
+    ActorBorderColor #b85450
+    GroupBackgroundColor #f5f5f5
+}
+
+actor "Estudiante" as E
+participant "Cámara / Micrófono" as Cam
+participant "IA Local (FastAPI)\nYOLOv8" as IA
+participant "App PyQt6" as App
+participant "Servidor WebSockets" as WS
+participant "API REST (Backend)" as API
+database "MinIO (Archivos)" as MinIO
+actor "Profesor" as P
+
+group PROCESAMIENTO LOCAL (Borde)
+    E -> Cam: Acción sospechosa (ej. mirar celular)
+    Cam -> IA: Transmite frame de video HTTP
+    activate IA
+    IA -> IA: Procesa imagen
+    IA --> App: Detecta 'Celular' (Confianza: 92%)
+    deactivate IA
+end
+
+group TRANSMISIÓN Y ALMACENAMIENTO (Nube)
+    activate App
+    App -> WS: Emite STOMP /app/alerta
+    activate WS
+    WS -> API: Encola evento crítico
+    activate API
+    API -> MinIO: Sube foto capturada
+    MinIO --> API: URL generada
+    API -> API: Guarda AlertaEvidencia en MongoDB
+end
+
+group NOTIFICACIÓN EN TIEMPO REAL
+    API -> WS: Broadcast alerta confirmada
+    deactivate API
+    WS --> P: Envía a /topic/profesor/{examenId}
+    deactivate WS
+    activate P
+    P -> P: Pop-up: "Alerta Visual Detectada"
+    deactivate App
+    deactivate P
+end
+@enduml

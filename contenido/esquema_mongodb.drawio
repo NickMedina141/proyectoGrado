@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2023-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="21.0.0" type="device">
+  <diagram id="diagram_1" name="Esquema MongoDB">
+    <mxGraphModel dx="1200" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Profesor -->
+        <mxCell id="Profesor" value="&lt;b style=&quot;font-size:14px&quot;&gt;Profesor&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;_id&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;: ObjectId&lt;br&gt;email&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;: String&lt;br&gt;password : String&lt;br&gt;nombre&amp;nbsp;&amp;nbsp;&amp;nbsp;: String&lt;/div&gt;" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="80" width="220" height="140" as="geometry" />
+        </mxCell>
+        
+        <!-- Estudiante -->
+        <mxCell id="Estudiante" value="&lt;b style=&quot;font-size:14px&quot;&gt;Estudiante&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;_id&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;: ObjectId&lt;br&gt;email&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;: String&lt;br&gt;nombre&amp;nbsp;&amp;nbsp;&amp;nbsp;: String&lt;br&gt;apellidos: String&lt;br&gt;materias : Array&lt;/div&gt;" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="80" width="220" height="150" as="geometry" />
+        </mxCell>
+        
+        <!-- Examen -->
+        <mxCell id="Examen" value="&lt;b style=&quot;font-size:14px&quot;&gt;Examen&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;_id&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;: ObjectId&lt;br&gt;&lt;font color=&quot;#ff0000&quot;&gt;profesorId&lt;/font&gt;&amp;nbsp;&amp;nbsp;: ObjectId&lt;br&gt;materiaCod&amp;nbsp;&amp;nbsp;: String&lt;br&gt;pinSesion&amp;nbsp;&amp;nbsp;&amp;nbsp;: String&lt;br&gt;estadoPin&amp;nbsp;&amp;nbsp;&amp;nbsp;: String&lt;br&gt;configuracion: Object&lt;/div&gt;" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="320" width="220" height="160" as="geometry" />
+        </mxCell>
+        
+        <!-- SesionSupervision -->
+        <mxCell id="Sesion" value="&lt;b style=&quot;font-size:14px&quot;&gt;SesionSupervision&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;_id&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;: ObjectId&lt;br&gt;&lt;font color=&quot;#ff0000&quot;&gt;examenId&lt;/font&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;: ObjectId&lt;br&gt;&lt;font color=&quot;#ff0000&quot;&gt;estudianteId&lt;/font&gt;: ObjectId&lt;br&gt;estadoSesion: String&lt;br&gt;conexion&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;: Object&lt;br&gt;reporteFinal: Object&lt;/div&gt;" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="320" width="220" height="170" as="geometry" />
+        </mxCell>
+        
+        <!-- AlertaEvidencia PADRE -->
+        <mxCell id="Alerta" value="&lt;b style=&quot;font-size:14px&quot;&gt;AlertaEvidencia&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;_id&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;: ObjectId&lt;br&gt;&lt;font color=&quot;#ff0000&quot;&gt;sesionId&lt;/font&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;: ObjectId&lt;br&gt;claseAlerta: String&lt;br&gt;nivelRiesgo: Int&lt;br&gt;horaCaptura: Date&lt;/div&gt;" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="550" width="220" height="150" as="geometry" />
+        </mxCell>
+        
+        <!-- SUBCLASES ALERTA -->
+        <mxCell id="AlertaVision" value="&lt;b style=&quot;font-size:14px&quot;&gt;AlertaVision&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;urlFoto: String&lt;/div&gt;" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="780" width="160" height="90" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="AlertaAudio" value="&lt;b style=&quot;font-size:14px&quot;&gt;AlertaAudio&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;urlAudio : String&lt;br&gt;decibeles: Int&lt;/div&gt;" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="780" width="160" height="90" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="AlertaProceso" value="&lt;b style=&quot;font-size:14px&quot;&gt;AlertaProceso&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-family:monospace;&quot;&gt;proceso: String&lt;/div&gt;" style="html=1;whiteSpace=wrap;shape=rect;align=center;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=5;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="780" width="160" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Relaciones Base -->
+        <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="Examen" target="Profesor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="Sesion" target="Examen">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="Sesion" target="Estudiante">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="Alerta" target="Sesion">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Relaciones de Herencia (Subclases a Padre) -->
+        <mxCell id="edge_vision" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#b85450;endArrow=block;endFill=0;dashed=1;" edge="1" parent="1" source="AlertaVision" target="Alerta">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="edge_audio" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#b85450;endArrow=block;endFill=0;dashed=1;" edge="1" parent="1" source="AlertaAudio" target="Alerta">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="edge_proceso" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;strokeColor=#b85450;endArrow=block;endFill=0;dashed=1;" edge="1" parent="1" source="AlertaProceso" target="Alerta">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

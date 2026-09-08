@@ -1,0 +1,33 @@
+meta {
+  name: 3. Abrir Sala Examen
+  type: http
+  seq: 3
+}
+post {
+  url: http://localhost:8080/api/examenes/ID_DEL_EXAMEN/abrir
+  body: none
+  auth: none
+}
+docs {
+  ### Abrir Sala Examen
+  **EndPoint:** `http://localhost:8080/api/examenes/{codigoExamen}/abrir`
+  
+  **Descripción del EndPoint:**
+  Habilita la sala para que los estudiantes comiencen a conectarse al WebSocket.
+  
+  **Método HTTP:** POST
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "message": "Sala abierta exitosamente"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "La fecha de inicio aún no se cumple"
+  }
+  ```
+}

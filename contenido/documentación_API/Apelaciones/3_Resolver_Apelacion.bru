@@ -1,0 +1,33 @@
+meta {
+  name: 3. Resolver Apelacion
+  type: http
+  seq: 3
+}
+put {
+  url: http://localhost:8080/api/apelaciones/ID_DE_SESION/resolver?resolucionComite=Se_acepta_reintento&estadoApelacion=APROBADA
+  body: none
+  auth: none
+}
+docs {
+  ### Resolver Apelación
+  **EndPoint:** `http://localhost:8080/api/apelaciones/{sesionId}/resolver`
+  
+  **Descripción del EndPoint:**
+  El profesor acepta o rechaza formalmente la apelación del estudiante.
+  
+  **Método HTTP:** PUT
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "message": "Apelación resuelta y cerrada"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Faltan los parámetros de resolución en la URL"
+  }
+  ```
+}

@@ -1,0 +1,57 @@
+meta {
+  name: 2. Configurar Examen
+  type: http
+  seq: 2
+}
+put {
+  url: http://localhost:8080/api/examenes/ID_DEL_EXAMEN/configurar
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "sensibilidadIA": "ALTA",
+    "duracionExamen": 120,
+    "permitirReintentos": 1,
+    "procesosPermitidos": ["moodle.exe"],
+    "urlsPermitidas": ["unicesar.edu.co"]
+  }
+}
+docs {
+  ### Configurar Examen
+  **EndPoint:** `http://localhost:8080/api/examenes/{codigoExamen}/configurar`
+  
+  **Descripción del EndPoint:**
+  Configura las reglas, procesos permitidos y sensibilidad de la IA para un examen.
+  
+  **Método HTTP:** PUT
+  
+  **Headers requeridos:** 
+  - Content-Type: application/json
+  
+  **Cuerpo de la Petición:**
+  ```json
+  {
+    "sensibilidadIA": "ALTA",
+    "duracionExamen": 120,
+    "permitirReintentos": 1,
+    "procesosPermitidos": ["moodle.exe"],
+    "urlsPermitidas": ["unicesar.edu.co"]
+  }
+  ```
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "codigoExamen": "77a8b9c0",
+    "configuracion": "Actualizada"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Error al configurar: Examen no encontrado"
+  }
+  ```
+}

@@ -1,0 +1,50 @@
+meta {
+  name: 1. Login Estudiante
+  type: http
+  seq: 1
+}
+post {
+  url: http://localhost:8080/api/auth/login/estudiante
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "email": "estudiante@unicesar.edu.co",
+    "password": "password123"
+  }
+}
+docs {
+  ### Login Estudiante
+  **EndPoint:** `http://localhost:8080/api/auth/login/estudiante`
+  
+  **Descripción del EndPoint:**
+  Autentica a un estudiante registrado en el sistema. Devuelve un token JWT para mantener la sesión.
+  
+  **Método HTTP:** POST
+  
+  **Headers requeridos:** 
+  - Content-Type: application/json
+  
+  **Cuerpo de la Petición:**
+  ```json
+  {
+    "email": "estudiante@unicesar.edu.co",
+    "password": "password123"
+  }
+  ```
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9..."
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Error de autenticación: Credenciales inválidas"
+  }
+  ```
+}

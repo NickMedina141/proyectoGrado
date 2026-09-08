@@ -1,0 +1,151 @@
+{
+    "// 1. COLECCIÓN: Profesores (Clase: Profesor.java)": {
+        "codigo_profesor": "String",
+        "nombre": "String",
+        "apellido": "String",
+        "cedula": "String",
+        "email": "String",
+        "password_hash": "String",
+        "estado": "Enums",
+        "materias": [
+            {
+                "codigo_materia": "String",
+                "nombre_materia": "String"
+            }
+        ],
+        "auditoria": {
+            "fecha_registro": "LocalDateTime",
+            "ultimo_acceso": "LocalDateTime"
+        }
+    },
+    "// 2. COLECCIÓN: Estudiantes (Clase: Estudiante.java)": {
+        "estudiante_id": "String",
+        "nombre": "String",
+        "apellido": "String",
+        "cedula": "String",
+        "email": "String",
+        "password_hash": "String",
+        "estado": "Enums",
+        "biometria_facial": {
+            "vector_rostro": "List<Double> o String",
+            "url_foto_registro": "String"
+        },
+        "auditoria": {
+            "fecha_registro": "LocalDateTime"
+        }
+    },
+    "// 3. COLECCIÓN: Examenes (Clase: Examen.java)": {
+        "codigo_examen": "String",
+        "profesor_id": "String",
+        "materia_codigo": "String",
+        "fechas": {
+            "creacion": "LocalDateTime",
+            "hora_inicio": "LocalDateTime",
+            "hora_fin": "LocalDateTime"
+        },
+        "duracion_minutos": "Integer",
+        "estadoExamen": "Enums",
+        "configuracion": {
+            "navegador_permitido": "Boolean",
+            "urls_permitidas": "List<String>",
+            "procesos_bloqueados": "List<String>",
+            "sensibilidad_ia": "String"
+        },
+        "estudiantes_inscritos": [
+            {
+                "estudiante_id": "String",
+                "estadoAcceso": "Enums"
+            }
+        ]
+    },
+    "// 4. COLECCIÓN: Sesion_examen (Clase: SesionExamen.java)": {
+        "sesion_id": "String",
+        "examen_id": "String",
+        "estudiante_id": "String",
+        "estadoSesion": "Enums",
+        "conexion": {
+            "ip_estudiante": "String",
+            "sistema_operativo": "String",
+            "hostname": "String",
+            "vpn_detectada": "Boolean"
+        },
+        "Alertas": {
+            "modulo_audio": [
+                {
+            "hora_captura": "LocalDateTime",
+            "url_audio": "/LocalStorage/sesion123/capturas_audio/evento_01.json",
+            "transcripcion": "String",
+            "confianza_voz": "Double",
+            "voces_detectadas": "Integer",
+                }
+            ],
+
+            
+            "modulo_captura": [
+            {
+            "tipo_evidencia": "String", // capturas_webcam
+            "hora_captura": "LocalDateTime",
+            "objeto_detectado": "String",
+            "confianza_ia": "Double",
+            "url_captura_pantalla": "String",
+            "url_foto_webcam": "/LocalStorage/sesion123/capturas_webcam/foto_01.json"
+            },
+            {
+            "tipo_evidencia": "String", // capturas de pantalla
+            "hora_captura": "LocalDateTime",
+            "objeto_detectado": "String",
+            "confianza_ia": "Double",
+            "url_captura_pantalla": "String",
+            "url_foto_webcam":"/LocalStorage/sesion123/capturas_pantalla/pantalla_01.json"
+            }
+        ],
+
+            "modulo_procesos": [
+            {
+            "nombre": "String",
+            "pid": "Integer",
+            "categoria": "String",
+            "accion": "String",
+            "hora_captura": "LocalDateTime",
+            "url_proceso": "/LocalStorage/sesion123/capturas_procesos/log_procesos.json"
+            }
+            ],
+
+            "modulo_actividad_teclado": [
+            {
+            "evento_teclado": "String",
+            "teclas": [],
+            "hora_captura": "LocalDateTime",
+            "gravedad": "String",
+            "url_actividad_teclado": "/LocalStorage/sesion123/capturas_teclado/log_teclado.json"
+            }
+            ], 
+        
+
+            "modulo_actividad_navegador": [
+            {
+            "evento_navegador": "String",
+            "hora_captura": "LocalDateTime",
+            "destino": "String",
+            "duracion_segundos": "Integer",
+            "url_navegadpr": "/LocalStorage/sesion123/capturas_navegador/log_navegador.json"
+            }
+        ]
+    },
+
+    "analisis_global_ia": {
+        "patron_comportamiento": "String",
+        "resumen_detallado": "String",
+        "nivel_confianza_promedio": "Double",
+        "modelo_version": "String"
+    },
+    
+    "reporte_final": {
+        "riesgo_global_calculado": "Integer",
+        "veredicto": "String",
+        "puntaje_examen": "Double",
+        "firma_docente": "String",
+        "url_pdf_reporte": "String"
+    }
+}
+}

@@ -1,0 +1,38 @@
+meta {
+  name: 5. Obtener Historial Alertas
+  type: http
+  seq: 5
+}
+get {
+  url: http://localhost:8080/api/supervision/ID_DE_SESION/alertas
+  body: none
+  auth: none
+}
+docs {
+  ### Obtener Historial de Alertas
+  **EndPoint:** `http://localhost:8080/api/supervision/{sesionId}/alertas`
+  
+  **Descripción del EndPoint:**
+  Devuelve el arreglo cronológico con las infracciones del estudiante durante su examen.
+  
+  **Método HTTP:** GET
+  
+  **Respuesta esperada:**
+  ```json
+  [
+    {
+      "idAlerta": "99x8d7",
+      "claseAlerta": "VISION",
+      "horaCaptura": "2026-08-30T10:15:00",
+      "nivelRiesgo": "ALTO"
+    }
+  ]
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Sesión no encontrada"
+  }
+  ```
+}

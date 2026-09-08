@@ -1,0 +1,54 @@
+meta {
+  name: 4. Guardar Veredicto
+  type: http
+  seq: 4
+}
+post {
+  url: http://localhost:8080/api/supervision/ID_DE_SESION/veredicto?veredictoDocente=Fraude_Confirmado&urlPDF=https://minio.local/reporte.pdf
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "resumenDetallado": "Uso de celular detectado",
+    "riesgoGlobalCalculado": "ALTO",
+    "puntajeRiesgoCalculado": 85,
+    "modeloIaUtilizado": "LLaMA-3"
+  }
+}
+docs {
+  ### Guardar Veredicto
+  **EndPoint:** `http://localhost:8080/api/supervision/{sesionId}/veredicto`
+  
+  **Descripción del EndPoint:**
+  Almacena el reporte final generado por el LLM y la nota del profesor.
+  
+  **Método HTTP:** POST
+  
+  **Headers requeridos:** 
+  - Content-Type: application/json
+  
+  **Cuerpo de la Petición:**
+  ```json
+  {
+    "resumenDetallado": "Uso de celular detectado",
+    "riesgoGlobalCalculado": "ALTO",
+    "puntajeRiesgoCalculado": 85,
+    "modeloIaUtilizado": "LLaMA-3"
+  }
+  ```
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "message": "Se guardó el veredicto correctamente"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Faltan parámetros en la URL"
+  }
+  ```
+}

@@ -1,0 +1,39 @@
+meta {
+  name: 5. Listar Examenes Profesor
+  type: http
+  seq: 5
+}
+get {
+  url: http://localhost:8080/api/examenes/profesor/ID_DEL_PROFESOR
+  body: none
+  auth: none
+}
+docs {
+  ### Listar Exámenes del Profesor
+  **EndPoint:** `http://localhost:8080/api/examenes/profesor/{profesorId}`
+  
+  **Descripción del EndPoint:**
+  Retorna todos los exámenes asignados a un profesor en específico.
+  
+  **Método HTTP:** GET
+  
+  **Respuesta esperada:**
+  ```json
+  [
+    {
+      "codigoExamen": "77a8b9c0",
+      "materiaCodigo": "SIS104",
+      "fechaExamen": {
+        "horaInicio": "2026-08-30T10:00:00"
+      }
+    }
+  ]
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Profesor no encontrado"
+  }
+  ```
+}

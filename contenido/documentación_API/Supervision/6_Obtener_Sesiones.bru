@@ -1,0 +1,37 @@
+meta {
+  name: 6. Obtener Sesiones por Examen
+  type: http
+  seq: 6
+}
+get {
+  url: http://localhost:8080/api/supervision/examen/ID_DEL_EXAMEN/sesiones
+  body: none
+  auth: none
+}
+docs {
+  ### Obtener Sesiones del Examen
+  **EndPoint:** `http://localhost:8080/api/supervision/examen/{codigoExamen}/sesiones`
+  
+  **Descripción del EndPoint:**
+  Lista los estudiantes matriculados y sus estados de sesión actuales.
+  
+  **Método HTTP:** GET
+  
+  **Respuesta esperada:**
+  ```json
+  [
+    {
+      "sesionId": "88c9d0e1",
+      "estudianteId": "65b9c1f2",
+      "estadoSesion": "FINALIZADA"
+    }
+  ]
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Examen no válido"
+  }
+  ```
+}

@@ -1,0 +1,37 @@
+meta {
+  name: 2. Obtener Pendientes Profesor
+  type: http
+  seq: 2
+}
+get {
+  url: http://localhost:8080/api/apelaciones/profesor/ID_DEL_PROFESOR/pendientes
+  body: none
+  auth: none
+}
+docs {
+  ### Obtener Pendientes Profesor
+  **EndPoint:** `http://localhost:8080/api/apelaciones/profesor/{profesorId}/pendientes`
+  
+  **Descripción del EndPoint:**
+  Retorna la cola de reclamaciones (apelaciones) que el profesor tiene por revisar.
+  
+  **Método HTTP:** GET
+  
+  **Respuesta esperada:**
+  ```json
+  [
+    {
+      "sesionId": "88c9d0e1",
+      "argumento": "Mi cámara se dañó",
+      "estadoApelacion": "PENDIENTE"
+    }
+  ]
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Profesor no válido"
+  }
+  ```
+}

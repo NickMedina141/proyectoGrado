@@ -1,0 +1,50 @@
+﻿@startuml
+autonumber
+skinparam sequence {
+    ParticipantBackgroundColor #d5e8d4
+    ParticipantBorderColor #82b366
+    ActorBackgroundColor #dae8fc
+    ActorBorderColor #6c8ebf
+    GroupBackgroundColor #f5f5f5
+}
+
+actor "Profesor" as P
+participant "App Profesor" as App
+participant "API REST (Backend)" as API
+participant "Modelo LLM" as LLM
+database "MongoDB" as DB
+actor "Estudiante" as E
+
+group CIERRE DE EXAMEN Y REPORTE
+    P -> App: Finaliza el Examen
+    activate App
+    App -> API: POST /api/examenes/{id}/cerrar
+    activate API
+    API -> LLM: Envía historial de Alertas
+    activate LLM
+    LLM --> API: Retorna Resumen y Riesgo Global
+    deactivate LLM
+    API -> DB: Actualiza SesionSupervision
+end
+
+group VEREDICTO FINAL
+    P -> App: Revisa reporte de IA y decide
+    App -> API: POST /api/supervision/{sesionId}/veredicto
+    API -> DB: Guarda ReporteFinal
+    API --> E: Notifica Veredicto Final
+end
+
+group PROCESO DE APELACIÓN
+    activate E
+    E -> API: POST /api/apelaciones/solicitar {Argumento}
+    API -> DB: Crea Proceso_apelacion (PENDIENTE)
+    P -> API: GET /api/apelaciones/pendientes
+    API --> P: Lista de reclamaciones
+    P -> API: PUT /api/apelaciones/resolver {Resolución}
+    API -> DB: Cierra Apelación (Estado: RESUELTA)
+    API --> E: Resultado definitivo emitido
+    deactivate E
+    deactivate API
+    deactivate App
+end
+@enduml

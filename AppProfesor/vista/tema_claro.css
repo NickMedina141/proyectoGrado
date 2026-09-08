@@ -1,0 +1,225 @@
+/* tema_claro.css */
+QWidget#VentanaPrincipal { background-color: #F4F6F6; }
+QFrame#navbar_lateral { background-color: #004D1E; }
+QLabel#label_logo { color: white; border: none; }
+
+/* Dashboard Styles */
+QLabel#etiqueta_titulo { color: #2C3E50; }
+QLabel#etiqueta_subtitulo { color: #7F8C8D; }
+QPushButton#boton_crear_examen {
+    background-color: #196F3D;
+    color: white;
+    border-radius: 0px;
+}
+QPushButton#boton_crear_examen:hover { background-color: #145A32; }
+QScrollArea, QScrollArea > QWidget, QWidget#contenido_scroll, QWidget#ReporteIA, QWidget#CrearExamen, QWidget#ConfiguracionExamen { background-color: transparent; border: none; }
+
+QFrame#tarjeta_1, QFrame#tarjeta_dinamica {
+    background-color: white;
+    border-radius: 0px;
+    border: 1px solid #E0E0E0;
+}
+QLabel#icon_t1, QLabel#icon_dinamico {
+    background-color: transparent;
+    color: #196F3D;
+    border-radius: 0px;
+    font-size: 16px;
+}
+QLabel#badge_t1 {
+    background-color: #EAEDED;
+    color: #558B2F;
+    border-radius: 0px;
+    padding: 5px 10px;
+    font-weight: bold;
+    border: 1px solid #AED581;
+}
+QLabel#titulo_t1, QLabel#titulo_dinamico { color: #2C3E50; font-weight: bold; font-size: 16px; }
+QLabel#fecha_t1, QLabel#inscritos_t1, QLabel#fecha_dinamico, QLabel#id_dinamico { color: #7F8C8D; }
+Line#linea_t1 { color: #EEEEEE; }
+QPushButton#btn_t1, QPushButton#btn_dinamico {
+    color: #196F3D;
+    font-weight: bold;
+    border: none;
+    background: transparent;
+}
+QPushButton#btn_toggle_dinamico {
+    color: #7F8C8D;
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
+    background: transparent;
+    margin-right: 10px;
+}
+QPushButton#btn_t1:hover, QPushButton#btn_dinamico:hover { color: #145A32; text-decoration: underline; }
+QPushButton#btn_toggle_dinamico:hover { color: #2C3E50; text-decoration: underline; }
+
+/* SALA DE SUPERVISION */
+QFrame#frame_central { background-color: #F7F9F7; }
+QFrame#frame_feed_alertas { background-color: #F1F4F1; border-left: 1px solid #E2E8E2; }
+QLabel#badge_envivo {
+    background-color: #F2F3F4; color: #A93226; border-radius: 0px;
+    padding: 4px 10px; font-weight: bold; font-size: 11px;
+}
+QPushButton#boton_finalizar {
+    background-color: #922B21; color: white; font-weight: bold;
+    border-radius: 0px; border: none;
+}
+QPushButton#boton_finalizar:hover { background-color: #E53935; }
+QLabel#titulo_feed { color: #2C3E50; }
+QLabel#estado_feed { color: #7F8C8D; }
+QScrollArea#area_scroll_grupos, QWidget#contenido_grupos { background: transparent; border: none; }
+QScrollArea#area_scroll_feed, QWidget#contenido_feed { background: transparent; border: none; }
+
+QFrame#tarjeta_e1, QFrame#tarjeta_e2, QFrame#tarjeta_e3 {
+    background-color: white; border-radius: 0px; border: 1px solid #E8EAE8;
+}
+QLabel#titulo_e1, QLabel#titulo_e2, QLabel#titulo_e3 { color: #2C3E50; }
+QLabel#badge_verde_1, QLabel#badge_verde_2 {
+    background-color: #EAEDED; color: #196F3D; border-radius: 0px;
+    padding: 3px 8px; font-weight: bold; font-size: 11px;
+}
+QLabel#badge_rojo_1, QLabel#badge_rojo_2 {
+    background-color: #F2F3F4; color: #A93226; border-radius: 0px;
+    padding: 3px 8px; font-weight: bold; font-size: 11px;
+}
+QLabel#label_est_1, QLabel#label_est_2, QLabel#label_est_3, QLabel#label_al_1, QLabel#label_al_2, QLabel#label_al_3, QLabel#label_cx_1, QLabel#label_cx_2, QLabel#label_cx_3 { color: #7F8C8D; }
+QLabel#val_norm_1, QLabel#val_norm_2, QLabel#val_norm_3 { color: #2C3E50; }
+QLabel#val_red_1, QLabel#val_red_2, QLabel#val_red_3, QLabel#val_red_4 { color: #A93226; }
+QLabel#val_green_1, QLabel#val_green_2, QLabel#val_green_3 { color: #196F3D; }
+
+QPushButton#btn_e1, QPushButton#btn_e2, QPushButton#btn_e3 {
+    background-color: #145A32; color: white; border-radius: 0px; font-weight: bold; border: none;
+}
+QPushButton#btn_e1:hover, QPushButton#btn_e2:hover, QPushButton#btn_e3:hover {
+    background-color: #004D1E;
+}
+
+QFrame#alerta_mock_1, QFrame#alerta_fraude_dinamica {
+    background-color: #F8F9F9; border-left: 2px solid #922B21; border-radius: 0px;
+}
+QLabel#alm1_titulo { color: #78281F; }
+QLabel#alm1_hora, QLabel#alm1_desc { color: #5D4037; }
+QLabel#alm1_link { color: #78281F; }
+
+QFrame#alerta_mock_2, QFrame#alerta_sistema_dinamica {
+    background-color: white; border-left: 2px solid #B0BEC5; border-radius: 0px;
+}
+QLabel#alm2_titulo { color: #455A64; }
+QLabel#alm2_hora, QLabel#alm2_desc { color: #607D8B; }
+
+/* DETALLE ESTUDIANTE */
+QPushButton#btn_contactar { background-color: #196F3D; color: white; border-radius: 0px; font-weight: bold; }
+QPushButton#btn_contactar:hover { background-color: #145A32; }
+
+QFrame#tarjeta_metricas, QFrame#tarjeta_historial {
+    background-color: white; border-radius: 0px; border: 1px solid #E8EAE8;
+}
+QLabel#titulo_metricas, QLabel#titulo_historial { color: #2C3E50; }
+QFrame#item_metrica_1, QFrame#item_metrica_2, QFrame#item_metrica_3 {
+    border: 1px solid #E8EAE8; border-radius: 0px;
+}
+QLabel#lm1_tit, QLabel#lm2_tit, QLabel#lm3_tit { color: #2C3E50; font-size: 13px; }
+QLabel#lm1_sub, QLabel#lm2_sub, QLabel#lm3_sub { color: #7F8C8D; font-size: 12px; }
+
+QLabel#badge_verde_metrica, QLabel#badge_verde_metrica_2 {
+    background-color: #EAEDED; color: #196F3D; border-radius: 0px; padding: 4px 10px; font-weight: bold; border: 1px solid #C8E6C9;
+}
+QLabel#badge_gris_metrica {
+    background-color: #F5F5F5; color: #616161; border-radius: 0px; padding: 4px 10px; font-weight: bold; border: 1px solid #E0E0E0;
+}
+
+QFrame#sys_box_cpu, QFrame#sys_box_ram {
+    background-color: #F1F4F1; border-radius: 0px;
+}
+QLabel#lcpu1, QLabel#lram1 { color: #7F8C8D; font-size: 11px; }
+QLabel#lcpu2, QLabel#lram2 { color: #2C3E50; font-size: 14px; }
+
+QFrame#historial_alerta_roja {
+    background-color: transparent; border-bottom: 1px solid #E8EAE8; border-radius: 0px; border-left: none; border-right: none;
+}
+QFrame#historial_alerta_verde {
+    background-color: transparent; border-bottom: 1px solid #E8EAE8; border-radius: 0px; border-left: none; border-right: none;
+}
+QLabel#hal_titulo_rojo { color: #2C3E50; font-weight: bold; }
+QLabel#hal_titulo_verde { color: #2C3E50; font-weight: bold; }
+QLabel#hal_hora { color: #7F8C8D; font-size: 11px; }
+QLabel#hal_desc { color: #616161; font-size: 12px; }
+
+/* REPORTE IA */
+QPushButton#btn_descargar_pdf { background-color: #196F3D; color: white; border-radius: 0px; font-weight: bold; }
+QPushButton#btn_descargar_pdf:hover { background-color: #145A32; }
+
+QFrame#tarjeta_top_roja { border-top: none !important; background-color: white;  border-radius: 0px; border-left: 1px solid #E8EAE8; border-right: 1px solid #E8EAE8; border-bottom: 1px solid #E8EAE8; }
+QFrame#tarjeta_top_naranja { border-top: none !important; background-color: white;  border-radius: 0px; border-left: 1px solid #E8EAE8; border-right: 1px solid #E8EAE8; border-bottom: 1px solid #E8EAE8; }
+QFrame#tarjeta_top_verde { border-top: none !important; background-color: white;  border-radius: 0px; border-left: 1px solid #E8EAE8; border-right: 1px solid #E8EAE8; border-bottom: 1px solid #E8EAE8; }
+
+QLabel#icon_rojo { background-color: #FFEBEE; color: #922B21; border-radius: 0px; font-size: 20px; font-weight: bold; }
+QLabel#icon_naranja { background-color: #FFF3E0; color: #FFA726; border-radius: 0px; font-size: 20px; font-weight: bold; }
+QLabel#icon_verde { background-color: #EAEDED; color: #1E8449; border-radius: 0px; font-size: 20px; font-weight: bold; }
+
+QLabel#val_top_rojo, QLabel#val_top_naranja, QLabel#val_top_verde { color: #2C3E50; }
+QLabel#lbl_top_rojo { color: #A93226; font-weight: bold; font-size: 13px; }
+QLabel#lbl_top_naranja { color: #CA6F1E; font-weight: bold; font-size: 13px; }
+QLabel#lbl_top_verde { color: #196F3D; font-weight: bold; font-size: 13px; }
+
+QFrame#panel_analisis, QFrame#panel_infractores { background-color: white; border-radius: 0px; border: 1px solid #E8EAE8; }
+QLabel#titulo_analisis, QLabel#titulo_infractores { color: #2C3E50; }
+QLabel#lbl_titulo, QLabel#titulo_veredicto { color: #2C3E50; }
+QComboBox#combo_examenes { color: #2C3E50; background-color: white; border: 1px solid #CCCCCC; border-radius: 0px; padding: 5px; }
+
+QLabel#lbl_an1, QLabel#lbl_an2, QLabel#lbl_an3, QLabel#lbl_an4 { color: #2C3E50; font-size: 13px; font-weight: bold; }
+QLabel#val_an1, QLabel#val_an2, QLabel#val_an3, QLabel#val_an4 { color: #2C3E50; font-size: 13px; }
+
+QProgressBar#bar_an1 { border: none; background-color: #F1F4F1; border-radius: 0px; }
+QProgressBar#bar_an1::chunk { background-color: #A93226; border-radius: 0px; }
+
+QProgressBar#bar_an2 { border: none; background-color: #F1F4F1; border-radius: 0px; }
+QProgressBar#bar_an2::chunk { background-color: #CA6F1E; border-radius: 0px; }
+
+QProgressBar#bar_an3 { border: none; background-color: #F1F4F1; border-radius: 0px; }
+QProgressBar#bar_an3::chunk { background-color: #8E44AD; border-radius: 0px; }
+
+QProgressBar#bar_an4 { border: none; background-color: #F1F4F1; border-radius: 0px; }
+QProgressBar#bar_an4::chunk { background-color: #2E86C1; border-radius: 0px; }
+
+QFrame#ranking_item_1, QFrame#ranking_item_2, QFrame#ranking_item_3 { background-color: #F9FAFC; border-radius: 0px; border: 1px solid #E8EAE8; }
+QLabel#rank_num_1, QLabel#rank_num_2, QLabel#rank_num_3 { background-color: #EAEDED; color: #196F3D; border-radius: 0px; font-weight: bold; font-size: 14px; }
+QLabel#rank_name_1, QLabel#rank_name_2, QLabel#rank_name_3 { color: #2C3E50; font-size: 14px; }
+QLabel#rank_al_1 { color: #A93226; font-size: 13px; }
+QLabel#rank_al_2, QLabel#rank_al_3 { color: #CA6F1E; font-size: 13px; }
+
+QPushButton#btn_ap_1, QPushButton#btn_ap_2, QPushButton#btn_ap_3 { background-color: transparent; border: 1px solid #7F8C8D; border-radius: 0px; color: #2C3E50; }
+QPushButton#btn_ap_1:hover, QPushButton#btn_ap_2:hover, QPushButton#btn_ap_3:hover { background-color: #E8EAE8; }
+
+/* PANEL DE APELACIONES */
+QTableWidget#tabla_apelaciones { border: 1px solid #E8EAE8; border-radius: 0px; background-color: white; }
+QHeaderView::section { background-color: #F1F4F1; font-weight: bold; padding: 10px; border: none; border-bottom: 1px solid #E8EAE8; color: #2C3E50; }
+QTableWidget#tabla_apelaciones::item { border-bottom: 1px solid #E8EAE8; padding: 10px; color: #2C3E50; }
+QTableWidget#tabla_apelaciones::item:selected { background-color: #EAEDED; color: #196F3D; }
+
+QFrame#frame_acciones_apelacion { background-color: #F1F8F1; border: 1px solid #C8E6C9; border-radius: 0px; }
+
+/* CREAR EXAMEN (PASO 1) */
+QFrame#tarjeta_formulario { background-color: white; border-radius: 0px; border: 1px solid #E0E0E0; }
+QLabel#titulo_principal { font-size: 24px; font-weight: bold; color: #2C3E50; }
+QFrame#tarjeta_formulario QLabel { color: #2C3E50; }
+QFrame#tarjeta_formulario QLineEdit, QFrame#tarjeta_formulario QComboBox, QFrame#tarjeta_formulario QDateEdit, QFrame#tarjeta_formulario QTimeEdit, QFrame#tarjeta_formulario QSpinBox, QFrame#tarjeta_formulario QTextEdit {
+    border: 1px solid #CCCCCC; border-radius: 0px; padding: 8px; font-size: 14px; background-color: #FFFFFF; color: #2C3E50;
+}
+QFrame#tarjeta_formulario QLineEdit:focus, QFrame#tarjeta_formulario QComboBox:focus, QFrame#tarjeta_formulario QDateEdit:focus, QFrame#tarjeta_formulario QTimeEdit:focus, QFrame#tarjeta_formulario QSpinBox:focus, QFrame#tarjeta_formulario QTextEdit:focus {
+    border: 1px solid #196F3D;
+}
+QFrame#tarjeta_formulario QComboBox QAbstractItemView {
+    background-color: white;
+    color: #2C3E50;
+    selection-background-color: #196F3D;
+    selection-color: white;
+}
+QFrame#tarjeta_formulario QCheckBox { font-size: 14px; }
+QFrame#tarjeta_formulario QCheckBox::indicator { width: 30px; height: 16px; border-radius: 0px; border: 1px solid #CCCCCC; background: #E0E0E0; }
+QFrame#tarjeta_formulario QCheckBox::indicator:checked { background: #196F3D; border: 1px solid #196F3D; }
+
+QPushButton#btn_siguiente, QPushButton#btn_finalizar { background-color: #196F3D; color: white; font-weight: bold; border-radius: 0px; padding: 10px 20px; border: none; }
+QPushButton#btn_siguiente:hover, QPushButton#btn_finalizar:hover { background-color: #0F5D21; }
+QPushButton#btn_cancelar, QPushButton#btn_anterior { background-color: transparent; color: #7F8C8D; font-weight: bold; border: 1px solid transparent; border-radius: 0px; padding: 10px 20px; }
+QPushButton#btn_cancelar:hover, QPushButton#btn_anterior:hover { background-color: #F1F4F1; color: #2C3E50; }

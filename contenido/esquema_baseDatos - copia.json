@@ -1,0 +1,156 @@
+//Esquema de la base de datos:
+
+//Colecciones:
+
+//Guardara todo lo del profesor
+//1) Profesores:
+{
+    codigo_profesor:
+    nombre:
+    apellido:
+    cedula:
+    email:
+    edad:
+    passowrd_hash:
+    estado:
+    materias: [
+        { codigo: , nombre: }
+        { codigo: , nombre: }
+    ]
+}
+
+//2) Examenes 
+{
+    codigo_examen:
+    profesor_id:
+    materia_codigo:
+    fecha_registro:
+    hora_inicio: //REVISAR
+    hora_fin: //REVISAR
+    duracion:
+    estado:
+    estudiantes: [
+        {
+            estudiante_id:
+            nombre:
+            cedula:
+            email:
+            estado:
+        }, 
+        {
+            estudiante_id:
+            nombre:
+            cedula:
+            email:
+            estado:
+        }
+    ]
+}
+
+//3) Sesion_examen 
+{
+    sesion_id:
+    examen_id:
+    profesor_id:
+    estudiante_id:
+    nombre_estudiante:
+    sesion: {
+        hora_inicio:
+        hora_fin:
+        estado:
+    }
+
+    conexion: {
+        ip_estudiante:
+        SO:
+        hostname:
+        vpn_detectada: //se detecta o no 
+    }
+    
+
+    riesgo_global:
+
+    modulo_audio: [
+        {
+            hora_captura:
+            url_audio:
+            transcripcion:
+            confianza_voz:
+            voces_detectadas:
+        },
+        {
+            hora_captura:
+            url_audio:                    
+            transcripcion:
+            confianza_voz:
+            voces_detectadas: // 1,2,3,...n
+        }
+    ]
+
+    modulo_captura: [
+        {
+            tipo_evidencia:
+            hora_captura:           
+            objeto_detectado:
+            confianza_ia:
+            url_captura_pantalla:
+            url_foto_webcam:
+        },
+
+        {
+            hora_captura:
+            tipo_evidencia:
+            objeto_detectado:
+            confianza_ia:
+            url_captura_pantalla:
+            url_foto_webcam:
+        }
+    ]
+
+    modulo_procesos: [
+        {
+            nombre:
+            pid:
+            categoria:
+            accion:
+            hora_captura:
+        }
+    ]
+
+    modulo_actividad_teclado: [
+        {
+            evento_teclado:
+            teclas: []
+            hora_captura:
+            gravedad:
+        }
+    ]
+
+    modulo_actividad_navegador: [
+        {
+            evento_navegador:
+            hora_captura:
+            destino:
+            duracion_segundos:
+        }
+    ]
+
+    analisis_detallado_ia: {
+        patron_detectado: 
+        resumen_detallado:
+        nivel_confianza_global:
+        modelo_version:
+    }
+
+
+    reporte_final: 
+    {
+        veredicto:
+        puntaje_final:
+        firma_docente:
+        estado:
+        url_pdf:
+        apelacion: //null
+    }
+
+}

@@ -1,0 +1,51 @@
+meta {
+  name: 2. Login Profesor
+  type: http
+  seq: 2
+}
+post {
+  url: http://localhost:8080/api/auth/login/profesor
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "email": "profesor@unicesar.edu.co",
+    "password": "password123"
+  }
+}
+docs {
+  ### Login Profesor
+  **EndPoint:** `http://localhost:8080/api/auth/login/profesor`
+  
+  **Descripción del EndPoint:**
+  Autentica a un docente. Retorna un token JWT y el ID interno del profesor para gestionar sus exámenes.
+  
+  **Método HTTP:** POST
+  
+  **Headers requeridos:** 
+  - Content-Type: application/json
+  
+  **Cuerpo de la Petición:**
+  ```json
+  {
+    "email": "profesor@unicesar.edu.co",
+    "password": "password123"
+  }
+  ```
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9...",
+    "profesorId": "65b9a8f2e4b0"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Error de autenticación: Usuario no encontrado"
+  }
+  ```
+}

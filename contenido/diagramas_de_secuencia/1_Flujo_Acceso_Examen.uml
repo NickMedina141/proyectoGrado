@@ -1,0 +1,46 @@
+﻿@startuml
+autonumber
+skinparam sequence {
+    ParticipantBackgroundColor #dae8fc
+    ParticipantBorderColor #6c8ebf
+    ActorBackgroundColor #d5e8d4
+    ActorBorderColor #82b366
+    GroupBackgroundColor #f5f5f5
+}
+
+actor "Estudiante" as E
+participant "App PyQt6" as App
+participant "API REST\n(Spring Boot)" as API
+database "MongoDB" as DB
+participant "Túnel WebSockets\n(STOMP)" as WS
+
+group FASE 1: Autenticación
+    E -> App: Ingresa Email y Contraseña
+    activate App
+    App -> API: POST /api/auth/login/estudiante
+    activate API
+    API -> DB: Verifica credenciales
+    DB --> API: OK (Datos válidos)
+    API --> App: Retorna Token JWT
+    deactivate API
+end
+
+group FASE 2: Acceso a la Sala
+    E -> App: Ingresa PIN del Examen
+    App -> API: POST /api/supervision/iniciar {pin, conexion}
+    activate API
+    API -> DB: Crea objeto SesionSupervision
+    DB --> API: ID de Sesión generado
+    API --> App: Sesión Aceptada (sesionId)
+    deactivate API
+end
+
+group FASE 3: Túnel de Telemetría
+    App -> WS: Conecta a ws://servidor/ws-supervision
+    activate WS
+    WS --> App: Conexión Upgrade (STOMP listo)
+    App --> E: "Examen Iniciado - Cámara Activa"
+    deactivate WS
+    deactivate App
+end
+@enduml

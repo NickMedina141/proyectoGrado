@@ -1,0 +1,63 @@
+meta {
+  name: 1. Crear Examen
+  type: http
+  seq: 1
+}
+post {
+  url: http://localhost:8080/api/examenes/crearExamen
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "profesorId": "65b9a8f2",
+    "moodleCursoId": "CURSO-101",
+    "moodleQuizId": "QUIZ-202",
+    "materiaCodigo": "SIS104",
+    "fechaExamen": {
+      "horaInicio": "2026-08-30T10:00:00",
+      "horaFin": "2026-08-30T12:00:00"
+    }
+  }
+}
+docs {
+  ### Crear Examen
+  **EndPoint:** `http://localhost:8080/api/examenes/crearExamen`
+  
+  **Descripción del EndPoint:**
+  Registra un nuevo examen vinculando Moodle con el sistema de supervisión.
+  
+  **Método HTTP:** POST
+  
+  **Headers requeridos:** 
+  - Content-Type: application/json
+  
+  **Cuerpo de la Petición:**
+  ```json
+  {
+    "profesorId": "65b9a8f2",
+    "moodleCursoId": "CURSO-101",
+    "moodleQuizId": "QUIZ-202",
+    "materiaCodigo": "SIS104",
+    "fechaExamen": {
+      "horaInicio": "2026-08-30T10:00:00",
+      "horaFin": "2026-08-30T12:00:00"
+    }
+  }
+  ```
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "codigoExamen": "77a8b9c0",
+    "profesorId": "65b9a8f2"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Error al crear el examen: Datos incompletos"
+  }
+  ```
+}

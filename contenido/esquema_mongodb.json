@@ -1,0 +1,151 @@
+{
+    "// 1. COLECCIÓN: Profesores (Para la App Docente)": {
+        "_id": "ObjectId",
+        "codigo_profesor": "String",
+        "nombre": "String",
+        "apellidos": "String",
+        "cedula": "String",
+        "email_institucional": "String",
+        "password_hash": "String (Argon2)",
+        "estado": "Enum (ACTIVO, INACTIVO, SUSPENDIDO)",
+        "materias": [
+            {
+                "codigo_materia": "String",
+                "nombre_materia": "String"
+            }
+        ],
+        "auditoria": {
+            "fecha_registro": "LocalDateTime",
+            "ultimo_acceso": "LocalDateTime",
+            "fecha_actualizacion": "LocalDateTime"
+        },
+        "seguridad_jwt": {
+            "refresh_tokens_activos": ["String"],
+            "ultimo_cambio_password": "LocalDateTime",
+            "intentos_fallidos_login": "Integer"
+        }
+    },
+
+    "// 2. COLECCIÓN: Estudiantes (Para la App Estudiante)": {
+        "_id": "ObjectId",
+        "estudiante_id": "String",
+        "nombre": "String",
+        "apellido": "String",
+        "email": "String",
+        "cedula": "String",
+        "password_hash": "String (Argon2)",
+        "estado": "Enum (ACTIVO, INACTIVO, PFU)",
+        "materias_inscritas": [
+            {
+                "codigo_materia": "String",
+                "nombre_materia": "String"
+            }
+        ],
+        "biometria_facial": {
+            "vector_rostro": "String (Lista serializada y Cifrada con AES-256)",
+            "url_foto_registro": "String (Cifrada con AES-256 apuntando a MinIO)",
+            "modelo_ia": "String (Ej: FaceNet, ArcFace)",
+            "dimension": "Integer (Ej: 128, 512)"
+        },
+        "auditoria": {
+            "fecha_registro": "LocalDateTime",
+            "ultimo_acceso": "LocalDateTime",
+            "fecha_actualizacion": "LocalDateTime"
+        },
+        "seguridad_jwt": {
+            "refresh_tokens_activos": ["String"],
+            "ultimo_cambio_password": "LocalDateTime",
+            "intentos_fallidos_login": "Integer"
+        }
+    },
+
+    "// 3. COLECCIÓN: Examenes": {
+        "codigo_examen": "ObjectId",
+        "profesor_id": "ObjectId (Ref -> Profesores)",
+        "moodle_course_id": "String (ID del curso para validar inscripción)",
+        "moodle_quiz_id": "String (ID del examen en Moodle)",
+        "materia_codigo": "String",
+        "control_acceso": {
+            "pin_sesion": "String (Generado para que entren los alumnos)",
+            "estado_pin": "Enum (ACTIVO, FINALIZADO)"
+        },
+        "fecha_examen": {
+            "creacion": "LocalDateTime",
+            "inicio": "LocalDateTime",
+            "fin": "LocalDateTime"
+        },
+        "configuracion": {
+            "sensibilidad_ia": "Enum (BAJA, MEDIA, ALTA)",
+            "duracion_maxima_examen": "Integer (Minutos)",
+            "permitir_reintentos": "Integer (Ej: 0, 1, 2)",
+            "procesos_permitidos": ["String (Ej: excel.exe, calc.exe)"],
+            "urls_permitidas": ["String (Ej: docs.python.org, wikipedia.org)"]
+        }
+    },
+
+    "// 4. COLECCIÓN: Sesiones_Supervision (Carpeta Principal del Alumno)": {
+        "_id": "ObjectId",
+        "examen_id": "ObjectId (Ref -> Examenes)",
+        "estudiante_id": "ObjectId (Ref -> Estudiantes)",
+        "estado_sesion": "Enum (INICIADA, FINALIZADA_OK, APELACION_EN_CURSO)",
+        "conexion": {
+            "ip_estudiante": "String",
+            "sistema_operativo": "String",
+            "vpn_detectada": "Boolean",
+            "protocolo_conexion": "String (Ej: HTTPS)"
+        },
+        "analisis_global_ia": {
+            "resumen_detallado": "String (Texto generado por el modelo)",
+            "riesgo_global_calculado": "Enum (BAJO, MEDIO, ALTO)",
+            "puntaje_riesgo_calculado": "0-100",
+            "modelo_ia_utilizado": "String (Ej: Ollama Phi-3, GPT-4, etc)"
+        },
+        "reporte_final": {
+            "veredicto_docente": "String",
+            "url_pdf_reporte": "String (MinIO)"
+        },
+        "proceso_apelacion": {
+            "apelacion_solicitada": "Enum (SOLICITADA, NO_SOLICITADA)",
+            "fecha_solicitud": "LocalDateTime",
+            "argumento_estudiante": "String",
+            "estado_apelacion": "Enum (EN_REVISION, APROBADA_A_FAVOR, RECHAZADA_FRAUDE_MANTENIDO)",
+            "resolucion_comite": "String"
+        }
+    },
+
+    "// 5. COLECCIÓN: Alertas_Evidencia (PATRÓN POLIMÓRFICO)": {
+        "_id": "ObjectId",
+        "sesion_id": "ObjectId (Ref -> Sesiones_Supervision)",
+        "clase_alerta": "Enum (AUDIO, VISION, PROCESO, TECLADO)",
+        "hora_captura": "LocalDateTime",
+        "nivel_riesgo": "Enum (BAJO, MEDIO, ALTO)",
+        
+        "// ---> VISION": {
+            "tipo_evidencia": "Enum (WEBCAM_OBJETO, ROSTRO_PERDIDO, MULTIPLES_ROSTROS, SUPLANTACION_IDENTIDAD)",
+            "cantidad_rostros": "Integer",
+            "objeto_detectado": "String",
+            "confianza_ia": "Double",
+            "url_foto_webcam": "String (MinIO)",
+            "url_captura_pantalla": "String (MinIO)"
+        },
+        
+        "// ---> AUDIO": {
+            "transcripcion": "String (Whisper)",
+            "voces_detectadas": "Integer",
+            "confianza_voz": "Double",
+            "url_audio": "String (MinIO)"
+        },
+
+        "// ---> PROCESO": {
+            "pid_proceso": "Integer (ID del proceso)",
+            "nombre_proceso": "String (Ej: obs64.exe)",
+            "categoria_proceso": "Enum (GRABADOR, CHAT, VM)",
+            "accion_tomada": "Enum (BLOQUEADO, ADVERTENCIA_MOSTRADA)"
+        },
+
+        "// ---> TECLADO": {
+            "combinacion_teclas": "String (Ej: Ctrl+V)",
+            "patron_sospechoso": "String (Ej: Pegado Masivo)"
+        }
+    }
+}

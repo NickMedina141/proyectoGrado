@@ -1,0 +1,5 @@
+url = "http://localhost:8080/api"
+url_login_profesor = f"{url}/auth/login/profesor"
+url_examenes = f"{url}/examenes"
+url_crear_examen = f"{url_examenes}/crearExamen"
+url_websocket = "ws://localhost:8080/ws-supervision"

@@ -1,0 +1,39 @@
+meta {
+  name: 1. Solicitar Apelacion
+  type: http
+  seq: 1
+}
+post {
+  url: http://localhost:8080/api/apelaciones/ID_DE_SESION/solicitar
+  body: text
+  auth: none
+}
+body:text {
+  Mi cámara se dañó, no fue un fraude real.
+}
+docs {
+  ### Solicitar Apelación
+  **EndPoint:** `http://localhost:8080/api/apelaciones/{sesionId}/solicitar`
+  
+  **Descripción del EndPoint:**
+  Envia una solicitud de revisión al profesor argumentando fallos técnicos o error de la IA.
+  
+  **Método HTTP:** POST
+  
+  **Cuerpo de la Petición:**
+  (Texto Plano) Mi cámara se dañó, no fue un fraude real.
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "message": "Apelación solicitada con éxito"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "La sesión no permite apelaciones"
+  }
+  ```
+}

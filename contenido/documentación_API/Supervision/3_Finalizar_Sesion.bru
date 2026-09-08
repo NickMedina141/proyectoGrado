@@ -1,0 +1,33 @@
+meta {
+  name: 3. Finalizar Sesion
+  type: http
+  seq: 3
+}
+post {
+  url: http://localhost:8080/api/supervision/ID_DE_SESION/finalizar
+  body: none
+  auth: none
+}
+docs {
+  ### Finalizar Sesión
+  **EndPoint:** `http://localhost:8080/api/supervision/{sesionId}/finalizar`
+  
+  **Descripción del EndPoint:**
+  Termina la supervisión de un estudiante de manera individual (entrega del examen).
+  
+  **Método HTTP:** POST
+  
+  **Respuesta esperada:**
+  ```json
+  {
+    "message": "La sesión fue finalizada exitosamente"
+  }
+  ```
+  
+  **Respuesta de error en caso de fallos:**
+  ```json
+  {
+    "message": "Sesión ya terminada"
+  }
+  ```
+}
