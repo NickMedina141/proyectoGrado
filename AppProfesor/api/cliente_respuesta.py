@@ -44,11 +44,9 @@ class ClienteApi:
     except httpx.RequestError as e:
       return False, f"Error de red: No se pudo conectar a Spring boot {str(e)}"
 
-  def crear_examen(self, profesor_id, moodle_curso_id, moodle_quiz_id, materia_codigo, fechaExamen=None):
+  def crear_examen(self, profesor_id, materia_codigo, fechaExamen=None):
     carga_util = {
       "profesorId": profesor_id,
-      "moodleCursoId": moodle_curso_id,
-      "moodleQuizId": moodle_quiz_id,
       "materiaCodigo": materia_codigo
     }
     if fechaExamen:

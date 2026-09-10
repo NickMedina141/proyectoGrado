@@ -27,7 +27,7 @@ public class ExamenController {
     public ResponseEntity<?> crearExamen(@RequestBody Examen peticionExamen) {
         try {
             //Creamos el examen y lo guardamos en una variable Examen
-            Examen examenCreado = examenService.crearExamen(peticionExamen.getProfesorId(), peticionExamen.getMoodleCursoId(), peticionExamen.getMoodleQuizId(),
+            Examen examenCreado = examenService.crearExamen(peticionExamen.getProfesorId(),
                     peticionExamen.getMateriaCodigo(), peticionExamen.getFechaExamen());
 
             //Retornamos el examen creado
@@ -38,12 +38,9 @@ public class ExamenController {
     }
 
     @PutMapping("/{codigoExamen}/configurar")
-    public ResponseEntity<?> configurarRestriccionesExamen(@PathVariable String codigoExamen, @RequestBody ConfiguracionExamen nuevaConfigurarExamen) {
+    public ResponseEntity<?> configurarRestriccionesExamen(@PathVariable String codigoExamen, @RequestBody java.util.Map<String, Object> payload) {
         try {
-            //Creamos una estancia de examen y traemos los datos del examen creado y le añadimos la configuración a ese examen
-            Examen examenConfigurado = examenService.configurarRestricciones(codigoExamen, nuevaConfigurarExamen);
-
-            //retornamos el examen ya configurado
+            Examen examenConfigurado = examenService.configurarDesdeMapa(codigoExamen, payload);
             return ResponseEntity.ok(examenConfigurado);
         } catch (Exception e) {
             return ResponseEntity.status(400).body("Error al configurr el examen: " + e.getMessage());

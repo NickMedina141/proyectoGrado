@@ -145,11 +145,35 @@ class VentanaPrincipal(QWidget):
       
       control_acceso = examen.get("controlAcceso") or {}
       estado_pin = control_acceso.get("estadoPin", "FINALIZADO")
-      
-      texto_badge = "EN CURSO" if estado_pin == "ACTIVO" else "FINALIZADO"
+        
+      # --- AUTOMATIZACIÓN DE TIEMPO ---
+      # Si la fecha actual está entre horaInicio y horaFin, forzamos visualmente a que esté ACTIVO (abierto)
+      fecha_dict = examen.get("fechaExamen") or {}
+      hora_fin_str = fecha_dict.get("horaFin")
+      hora_inicio_str = fecha_dict.get("horaInicio")
+        
+      import datetime
+      try:
+          if hora_inicio_str and hora_fin_str:
+              ahora = datetime.datetime.now().astimezone()
+              dt_inicio = datetime.datetime.fromisoformat(hora_inicio_str).astimezone()
+              dt_fin = datetime.datetime.fromisoformat(hora_fin_str).astimezone()
+              
+              if dt_inicio <= ahora <= dt_fin:
+                  estado_pin = "ACTIVO"
+              elif ahora > dt_fin:
+                  estado_pin = "FINALIZADO"
+              elif ahora < dt_inicio:
+                  estado_pin = "PROGRAMADO"
+      except Exception as e:
+          pass
+        
+      texto_badge = "EN CURSO" if estado_pin == "ACTIVO" else ("PROGRAMADO" if estado_pin == "PROGRAMADO" else "FINALIZADO")
       badge = QLabel(texto_badge)
       if estado_pin == "ACTIVO":
         badge.setStyleSheet("background-color: #C1F032; color: #003B13; border-radius: 4px; padding: 4px; font-weight: bold;")
+      elif estado_pin == "PROGRAMADO":
+        badge.setStyleSheet("background-color: #3498DB; color: #FFFFFF; border-radius: 4px; padding: 4px; font-weight: bold;")
       else:
         badge.setStyleSheet("background-color: #E0E0E0; color: #333333; border-radius: 4px; padding: 4px; font-weight: bold;")
 
@@ -162,7 +186,12 @@ class VentanaPrincipal(QWidget):
       fecha_dict = examen.get("fechaExamen") or {}
       fecha_str = fecha_dict.get("horaInicio", "Sin Fecha")
       if "T" in fecha_str:
-        fecha_str = fecha_str.split("T")[0]
+        try:
+            import datetime
+            dt_local = datetime.datetime.fromisoformat(fecha_str).astimezone()
+            fecha_str = dt_local.strftime("%Y-%m-%d")
+        except:
+            fecha_str = fecha_str.split("T")[0]
       lbl_fecha = QLabel(f" {fecha_str}")
       lbl_fecha.setObjectName("fecha_dinamico")
       lay_v.addWidget(lbl_fecha)
@@ -179,8 +208,10 @@ class VentanaPrincipal(QWidget):
       lbl_tiempo.setStyleSheet("color: #e74c3c; font-weight: bold; font-family: Consolas;")
       lay_v.addWidget(lbl_tiempo)
       
-      if estado_pin == "ACTIVO" and hora_fin:
-          self.etiquetas_tiempo.append((lbl_tiempo, hora_fin))
+      if estado_pin == "ACTIVO" and hora_fin_str:
+          self.etiquetas_tiempo.append((lbl_tiempo, hora_fin_str, "Cierra en: "))
+      elif estado_pin == "PROGRAMADO" and hora_inicio_str:
+          self.etiquetas_tiempo.append((lbl_tiempo, hora_inicio_str, "Inicia en: "))
       elif estado_pin == "FINALIZADO":
           lbl_tiempo.setText(" Examen Finalizado")
           lbl_tiempo.setStyleSheet("color: #7f8c8d; font-weight: bold;")
@@ -245,11 +276,10 @@ class VentanaPrincipal(QWidget):
       ahora_utc = datetime.now(timezone.utc)
       ahora_local = datetime.now()
       
-      for lbl, hora_fin_str in self.etiquetas_tiempo:
+      for lbl, hora_objetivo_str, prefijo in self.etiquetas_tiempo:
           try:
               # '2026-09-30T23:59:59.000Z' o '2026-09-30T23:59:59'
-              # Reemplazar Z por +00:00 para datetime.fromisoformat si es python 3.9+
-              iso_str = hora_fin_str.replace("Z", "+00:00")
+              iso_str = hora_objetivo_str.replace("Z", "+00:00")
               if "." in iso_str and not "+" in iso_str:
                  iso_str = iso_str.split(".")[0]
               
@@ -265,17 +295,17 @@ class VentanaPrincipal(QWidget):
               if faltan > 0:
                   dias = int(faltan // 86400)
                   horas = int((faltan % 86400) // 3600)
-                  minutos = int((faltan % 3600) // 60)
-                  segundos = int(faltan % 60)
+                  mins = int((faltan % 3600) // 60)
+                  segs = int(faltan % 60)
+                  
                   if dias > 0:
-                      lbl.setText(f" Quedan: {dias}d {horas:02d}h {minutos:02d}m {segundos:02d}s")
+                      lbl.setText(f" {prefijo}{dias}d {horas:02d}:{mins:02d}:{segs:02d}")
                   else:
-                      lbl.setText(f" Quedan: {horas:02d}h {minutos:02d}m {segundos:02d}s")
+                      lbl.setText(f" {prefijo}{horas:02d}:{mins:02d}:{segs:02d}")
               else:
-                  lbl.setText(" Expirado (Actualiza)")
-                  lbl.setStyleSheet("color: #e74c3c; font-weight: bold;")
+                  lbl.setText(" Actualizando...")
           except Exception as e:
-              lbl.setText(" Error formato")
+              lbl.setText(" Error de tiempo")
 
   def alternar_estado_examen(self, id_sesion, estado_actual):
     from api.cliente_respuesta import cliente_api
@@ -298,93 +328,179 @@ class VentanaPrincipal(QWidget):
     self.cambiar_vista(1)
 
   def abrir_configuracion_examen(self, examen):
-    from PyQt6.QtWidgets import QDialog, QMessageBox, QWidget, QVBoxLayout, QScrollArea
+    from PyQt6.QtWidgets import QDialog, QMessageBox, QWidget, QVBoxLayout, QStackedWidget, QScrollArea
     from PyQt6 import uic
-    from PyQt6.QtCore import Qt
+    from PyQt6.QtCore import Qt, QDate, QTime
     import os
     
     dialogo = QDialog(self)
-    dialogo.setWindowTitle("Configurar Examen")
+    dialogo.setWindowTitle("Editar Examen")
+    dialogo.resize(800, 550)
     
-    # Crear ScrollArea para pantallas pequeñas
-    scroll = QScrollArea(dialogo)
-    scroll.setWidgetResizable(True)
-    scroll.setStyleSheet("QScrollArea { border: none; background-color: #f9f9f9; }")
-    
-    # Cargar la misma UI del paso 2 en un widget interno
-    widget_interno = QWidget()
-    base_path = os.path.dirname(__file__)
-    uic.loadUi(os.path.join(base_path, "configuracion_examen.xml"), widget_interno)
-    scroll.setWidget(widget_interno)
+    # Bug visual arreglado: Windows 11 ignora el color de QDialog. Pintamos el ScrollArea que cubre todo.
+    color_fondo = "#0F172A" if hasattr(self, 'modo_oscuro') and self.modo_oscuro else "#F4F6F6"
     
     layout_main = QVBoxLayout(dialogo)
     layout_main.setContentsMargins(0, 0, 0, 0)
+    
+    scroll = QScrollArea(dialogo)
+    scroll.setWidgetResizable(True)
+    scroll.setStyleSheet(f"""
+        QScrollArea {{ border: none; background-color: {color_fondo}; }}
+        QWidget#qt_scrollarea_viewport {{ background-color: {color_fondo}; }}
+    """)
+    
+    stack = QStackedWidget()
+    stack.setObjectName("MainConfigStack")
+    stack.setStyleSheet(f"QWidget#MainConfigStack {{ background-color: {color_fondo}; }}")
+    scroll.setWidget(stack)
+    
     layout_main.addWidget(scroll)
     
-    # Adaptar los textos y ocultar boton anterior
-    widget_interno.subtitulo_principal.setText("Modifique los parámetros de proctoring automatizado para este examen.")
-    widget_interno.btn_anterior.setVisible(False)
-    widget_interno.btn_finalizar.setText("Guardar y Actualizar Configuración")
+    base_path = os.path.dirname(__file__)
+    
+    # --- PASO 1: Información Básica (crear_examen.xml) ---
+    widget_paso1 = QWidget()
+    uic.loadUi(os.path.join(base_path, "crear_examen.xml"), widget_paso1)
+    stack.addWidget(widget_paso1)
+    
+    # Adaptar textos del paso 1
+    if hasattr(widget_paso1, 'titulo_principal'):
+        widget_paso1.titulo_principal.setText("Editar Examen")
+    
+    widget_paso1.entrada_materia.setText(examen.get("materiaCodigo", ""))
+    widget_paso1.entrada_materia.setReadOnly(True) # La materia no se debería cambiar fácilmente
+    widget_paso1.entrada_materia.setStyleSheet("background-color: #e0e0e0; color: #555;")
     
     # Cargar valores actuales del examen
     config_actual = examen.get("configuracionExamen") or {}
+    fecha_examen = examen.get("fechaExamen") or {}
+    
+    if fecha_examen.get("horaInicio"):
+        import datetime
+        from PyQt6.QtCore import QDate, QTime
+        try:
+            # Parsear la cadena ISO (con timezone) y convertir a la zona horaria local
+            dt_local = datetime.datetime.fromisoformat(fecha_examen.get("horaInicio")).astimezone()
+            
+            fecha_obj = QDate(dt_local.year, dt_local.month, dt_local.day)
+            hora_obj = QTime(dt_local.hour, dt_local.minute)
+            
+            if fecha_obj.isValid(): widget_paso1.entrada_fecha.setDate(fecha_obj)
+            if hora_obj.isValid():
+                  hour12 = hora_obj.hour() % 12
+                  if hour12 == 0: hour12 = 12
+                  from PyQt6.QtCore import QTime
+                  widget_paso1.entrada_hora_texto.setTime(QTime(hour12, hora_obj.minute()))
+                  widget_paso1.entrada_hora_ampm.setCurrentText('PM' if hora_obj.hour() >= 12 else 'AM')
+            
+            if fecha_examen.get("horaFin") and hasattr(widget_paso1, 'entrada_fecha_fin'):
+                dt_fin_local = datetime.datetime.fromisoformat(fecha_examen.get("horaFin")).astimezone()
+                fecha_fin_obj = QDate(dt_fin_local.year, dt_fin_local.month, dt_fin_local.day)
+                if fecha_fin_obj.isValid(): widget_paso1.entrada_fecha_fin.setDate(fecha_fin_obj)
+            elif hasattr(widget_paso1, 'entrada_fecha_fin'):
+                widget_paso1.entrada_fecha_fin.setDate(fecha_obj)
+                
+        except Exception as e:
+            print("Error procesando fecha:", e)
+        
+    if hasattr(widget_paso1, 'entrada_duracion'):
+        widget_paso1.entrada_duracion.setValue(config_actual.get("duracionExamen", 120))
+        
+    # Desconectar botones si tienen conexiones previas del UI, y reconectarlos
+    try: widget_paso1.btn_cancelar.clicked.disconnect()
+    except TypeError: pass
+    
+    try: widget_paso1.btn_siguiente.clicked.disconnect()
+    except TypeError: pass
+    
+    widget_paso1.btn_cancelar.clicked.connect(dialogo.reject)
+    widget_paso1.btn_siguiente.clicked.connect(lambda: stack.setCurrentIndex(1))
+
+    # --- PASO 2: Configuración IA (configuracion_examen.xml) ---
+    widget_paso2 = QWidget()
+    uic.loadUi(os.path.join(base_path, "configuracion_examen.xml"), widget_paso2)
+    stack.addWidget(widget_paso2)
+    
+    # Ocultar campos de edición básicos inyectados anteriormente (ya que ahora están en el paso 1)
+    if hasattr(widget_paso2, 'widget_info_basica'):
+        widget_paso2.widget_info_basica.setVisible(False)
+        
+    # Adaptar textos del paso 2
+    widget_paso2.titulo_principal.setText("Ajustes de Supervisión IA")
+    widget_paso2.subtitulo_principal.setText("Modifique los parámetros de proctoring automatizado para este examen.")
+    widget_paso2.btn_finalizar.setText("Guardar y Actualizar")
     
     # Toggles de IA
     facial_val = config_actual.get("activarReconocimientoFacial")
-    widget_interno.chk_facial.setChecked(True if facial_val is None else bool(facial_val))
+    widget_paso2.chk_facial.setChecked(True if facial_val is None else bool(facial_val))
     
     objetos_val = config_actual.get("activarDeteccionObjetos")
-    widget_interno.chk_objetos.setChecked(True if objetos_val is None else bool(objetos_val))
+    widget_paso2.chk_objetos.setChecked(True if objetos_val is None else bool(objetos_val))
     
     audio_val = config_actual.get("activarAnalisisAudio")
-    widget_interno.chk_audio.setChecked(False if audio_val is None else bool(audio_val))
+    widget_paso2.chk_audio.setChecked(False if audio_val is None else bool(audio_val))
     
     procesos_val = config_actual.get("activarMonitoreoProcesos")
-    if hasattr(widget_interno, "chk_procesos"):
-        widget_interno.chk_procesos.setChecked(True if procesos_val is None else bool(procesos_val))
+    if hasattr(widget_paso2, "chk_procesos"):
+        widget_paso2.chk_procesos.setChecked(True if procesos_val is None else bool(procesos_val))
         
     teclado_val = config_actual.get("activarAnalisisTeclado")
-    if hasattr(widget_interno, "chk_teclado"):
-        widget_interno.chk_teclado.setChecked(True if teclado_val is None else bool(teclado_val))
+    if hasattr(widget_paso2, "chk_teclado"):
+        widget_paso2.chk_teclado.setChecked(True if teclado_val is None else bool(teclado_val))
     
     sensibilidad_actual = config_actual.get("sensibilidadIA", "MEDIA")
     idx = {"BAJA": 0, "MEDIA": 1, "ALTA": 2}.get(sensibilidad_actual, 1)
-    widget_interno.entrada_sensibilidad.setCurrentIndex(idx)
+    widget_paso2.entrada_sensibilidad.setCurrentIndex(idx)
     
     reintentos = config_actual.get("permitirReintentos", 3)
-    widget_interno.entrada_reintentos.setValue(reintentos)
+    widget_paso2.entrada_reintentos.setValue(reintentos)
     
     urls = config_actual.get("urlsPermitidas", [])
-    widget_interno.entrada_urls.setText(", ".join(urls))
+    widget_paso2.entrada_urls.setText(", ".join(urls))
     
     programas = config_actual.get("procesosPermitidos", [])
-    widget_interno.entrada_programas.setText(", ".join(programas))
+    widget_paso2.entrada_programas.setText(", ".join(programas))
+    
+    try: widget_paso2.btn_anterior.clicked.disconnect()
+    except TypeError: pass
+    
+    try: widget_paso2.btn_finalizar.clicked.disconnect()
+    except TypeError: pass
+    
+    widget_paso2.btn_anterior.clicked.connect(lambda: stack.setCurrentIndex(0))
     
     def guardar_cambios():
         from api.cliente_respuesta import cliente_api
         
         sensibilidad_map = {0: "BAJA", 1: "MEDIA", 2: "ALTA"}
-        sensibilidad = sensibilidad_map.get(widget_interno.entrada_sensibilidad.currentIndex(), "MEDIA")
-        reintentos_nuevos = widget_interno.entrada_reintentos.value()
+        sensibilidad = sensibilidad_map.get(widget_paso2.entrada_sensibilidad.currentIndex(), "MEDIA")
+        reintentos_nuevos = widget_paso2.entrada_reintentos.value()
         
-        urls_raw = widget_interno.entrada_urls.toPlainText()
+        urls_raw = widget_paso2.entrada_urls.toPlainText()
         urls_list = [u.strip() for u in urls_raw.split(',') if u.strip()]
         
-        prog_raw = widget_interno.entrada_programas.toPlainText()
+        prog_raw = widget_paso2.entrada_programas.toPlainText()
         prog_list = [p.strip() for p in prog_raw.split(',') if p.strip()]
-        
+                
         payload = {
-            "activarReconocimientoFacial": widget_interno.chk_facial.isChecked(),
-            "activarDeteccionObjetos": widget_interno.chk_objetos.isChecked(),
-            "activarAnalisisAudio": widget_interno.chk_audio.isChecked(),
-            "activarMonitoreoProcesos": getattr(widget_interno, "chk_procesos").isChecked() if hasattr(widget_interno, "chk_procesos") else True,
-            "activarAnalisisTeclado": getattr(widget_interno, "chk_teclado").isChecked() if hasattr(widget_interno, "chk_teclado") else True,
+              "fechaString": widget_paso1.entrada_fecha.date().toString("yyyy-MM-dd"),
+              "fechaFinString": widget_paso1.entrada_fecha_fin.date().toString("yyyy-MM-dd") if hasattr(widget_paso1, 'entrada_fecha_fin') else widget_paso1.entrada_fecha.date().toString("yyyy-MM-dd"),
+              "horaInicioString": f"{widget_paso1.entrada_hora_texto.time().hour() + (12 if widget_paso1.entrada_hora_ampm.currentText() == 'PM' and widget_paso1.entrada_hora_texto.time().hour() < 12 else (-12 if widget_paso1.entrada_hora_ampm.currentText() == 'AM' and widget_paso1.entrada_hora_texto.time().hour() == 12 else 0)):02d}:{widget_paso1.entrada_hora_texto.time().minute():02d}",
+              "activarReconocimientoFacial": widget_paso2.chk_facial.isChecked(),
+            "activarDeteccionObjetos": widget_paso2.chk_objetos.isChecked(),
+            "activarAnalisisAudio": widget_paso2.chk_audio.isChecked(),
+            "activarMonitoreoProcesos": getattr(widget_paso2, "chk_procesos").isChecked() if hasattr(widget_paso2, "chk_procesos") else True,
+            "activarAnalisisTeclado": getattr(widget_paso2, "chk_teclado").isChecked() if hasattr(widget_paso2, "chk_teclado") else True,
             "sensibilidadIA": sensibilidad,
-            "duracionExamen": config_actual.get("duracionExamen", 120),
+            "duracionExamen": widget_paso1.entrada_duracion.value() if hasattr(widget_paso1, 'entrada_duracion') else config_actual.get("duracionExamen", 120),
             "permitirReintentos": reintentos_nuevos,
             "procesosPermitidos": prog_list,
             "urlsPermitidas": urls_list
         }
+        
+        # Filtrar valores nulos
+        payload = {k: v for k, v in payload.items() if v is not None}
         
         exito, msg = cliente_api.configurar_examen(examen.get("codigoExamen"), payload)
         if exito:
@@ -392,14 +508,10 @@ class VentanaPrincipal(QWidget):
             dialogo.accept()
             self.cargar_mis_examenes()
         else:
-            QMessageBox.warning(dialogo, "Error", f"Fallo al actualizar: {msg}")
+            QMessageBox.warning(dialogo, "Error", f"No se pudo actualizar: {msg}")
             
-    widget_interno.btn_finalizar.clicked.connect(guardar_cambios)
+    widget_paso2.btn_finalizar.clicked.connect(guardar_cambios)
     
-    # Ajustar CSS extra si es necesario
-    dialogo.setObjectName("MainConfigDialog")
-    dialogo.setStyleSheet(dialogo.styleSheet() + " QDialog#MainConfigDialog { background-color: #f9f9f9; }")
-    dialogo.resize(800, 550) # Un poco más bajito, el scroll hará el resto
     dialogo.exec()
 
   def crear_examen(self):

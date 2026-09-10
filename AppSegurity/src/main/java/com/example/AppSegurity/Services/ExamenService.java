@@ -25,7 +25,7 @@ public class ExamenService {
     @Autowired
     private ExamenRepository examenRepository;
 
-    public Examen crearExamen(String codigoProfesor, String moodleCurseId, String moodleQuizId, String materiaCodigo, FechaExamen fecha) {
+    public Examen crearExamen(String codigoProfesor, String materiaCodigo, FechaExamen fecha) {
         //Generamos el PIN de manera aleatoria e irrepetible
         String PIN_aleatorio = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
 
@@ -51,27 +51,71 @@ public class ExamenService {
         Examen examen = new Examen(
                 null,
                 codigoProfesor,
-                moodleCurseId,
-                moodleQuizId,
                 materiaCodigo,
                 controlAcceso,
                 fecha,
-                configuracionExamenPorDefecto);
+                configuracionExamenPorDefecto
+        );
 
-        // guardamos el examen creado y lo retornamos
+        //Se lo enviamos a MongoDB pa que lo guarde
         return examenRepository.save(examen);
 
     }
 
-    public Examen configurarRestricciones(String codigoExamen, ConfiguracionExamen nuevConfiguracionExamen) {
-        //Se busca el examen creado y se trae de la base de datos
+    public Examen configurarDesdeMapa(String codigoExamen, java.util.Map<String, Object> payload) {
         Examen examen = examenRepository.findById(codigoExamen)
-                .orElseThrow(() -> new RuntimeException("Error al traer la información del examenv"));
+                .orElseThrow(() -> new RuntimeException("Error al traer la información del examen"));
 
-        //Reemplazamos la configuración del examen creado por la nueva que llega
-        examen.setConfiguracionExamen(nuevConfiguracionExamen);
+        // Actualizar FechaExamen si viene en el payload
+        if (payload.containsKey("fechaString") && payload.containsKey("horaInicioString")) {
+            com.example.AppSegurity.Sub_Clases.FechaExamen fecha = examen.getFechaExamen();
+            if (fecha == null) fecha = new com.example.AppSegurity.Sub_Clases.FechaExamen();
+            
+                String fechaStr = (String) payload.get("fechaString");
+                String fechaFinStr = payload.containsKey("fechaFinString") ? (String) payload.get("fechaFinString") : fechaStr;
+                String horaStr = (String) payload.get("horaInicioString");
+                
+                try {
+                    // Parsear fecha y hora para inicio y fin
+                    java.time.LocalDate date = java.time.LocalDate.parse(fechaStr);
+                    java.time.LocalDate dateFin = java.time.LocalDate.parse(fechaFinStr);
+                    
+                    // "15:00" -> LocalTime
+                    java.time.LocalTime time = java.time.LocalTime.parse(horaStr);
+                    java.time.LocalDateTime inicio = java.time.LocalDateTime.of(date, time);
+                    java.time.LocalDateTime inicioBaseFin = java.time.LocalDateTime.of(dateFin, time);
+                    
+                    fecha.setCreacion(java.time.LocalDateTime.now());
+                    fecha.setHoraInicio(inicio);
+                    
+                    // Si viene duracion, calculamos horaFin
+                    if (payload.containsKey("duracionExamen")) {
+                        int duracion = Integer.parseInt(payload.get("duracionExamen").toString());
+                        fecha.setHoraFin(inicioBaseFin.plusMinutes(duracion));
+                }
+                
+                examen.setFechaExamen(fecha);
+            } catch (Exception e) {
+                System.out.println("Error parseando fechas desde mapa: " + e.getMessage());
+            }
+        }
 
-        //Guardamos la configuración en la base de datos
+        // Actualizar Configuración IA
+        ConfiguracionExamen config = examen.getConfiguracionExamen();
+        if (config == null) config = new ConfiguracionExamen();
+        
+        if (payload.containsKey("activarReconocimientoFacial")) config.setActivarReconocimientoFacial((Boolean) payload.get("activarReconocimientoFacial"));
+        if (payload.containsKey("activarDeteccionObjetos")) config.setActivarDeteccionObjetos((Boolean) payload.get("activarDeteccionObjetos"));
+        if (payload.containsKey("activarAnalisisAudio")) config.setActivarAnalisisAudio((Boolean) payload.get("activarAnalisisAudio"));
+        if (payload.containsKey("activarMonitoreoProcesos")) config.setActivarMonitoreoProcesos((Boolean) payload.get("activarMonitoreoProcesos"));
+        if (payload.containsKey("activarAnalisisTeclado")) config.setActivarAnalisisTeclado((Boolean) payload.get("activarAnalisisTeclado"));
+        if (payload.containsKey("sensibilidadIA")) config.setSensibilidadIA(com.example.AppSegurity.Enums.Sensibilidad_IA.valueOf((String) payload.get("sensibilidadIA")));
+        if (payload.containsKey("duracionExamen")) config.setDuracionExamen((Integer) payload.get("duracionExamen"));
+        if (payload.containsKey("permitirReintentos")) config.setPermitirReintentos((Integer) payload.get("permitirReintentos"));
+        if (payload.containsKey("procesosPermitidos")) config.setProcesosPermitidos((java.util.List<String>) payload.get("procesosPermitidos"));
+        if (payload.containsKey("urlsPermitidas")) config.setUrlsPermitidas((java.util.List<String>) payload.get("urlsPermitidas"));
+
+        examen.setConfiguracionExamen(config);
         return examenRepository.save(examen);
     }
 

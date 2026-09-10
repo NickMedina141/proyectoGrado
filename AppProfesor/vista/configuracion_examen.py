@@ -20,6 +20,10 @@ class ConfiguracionExamen(QWidget):
     self.btn_anterior.clicked.connect(self.emitir_anterior)
     self.btn_finalizar.clicked.connect(self.procesar_finalizar)
     
+    # Ocultar campos de edición por defecto (solo se muestran al modificar)
+    if hasattr(self, 'widget_info_basica'):
+        self.widget_info_basica.setVisible(False)
+    
     # Diccionario para almacenar los datos del paso 1
     self.datos_paso_1 = {}
     
@@ -35,9 +39,8 @@ class ConfiguracionExamen(QWidget):
   def procesar_finalizar(self):
     # 1. Recuperamos los datos del paso 1
     materia = self.datos_paso_1.get("materia")
-    grupo = self.datos_paso_1.get("grupo") # Puede ser el curso_id de Moodle
-    id_moodle = self.datos_paso_1.get("id_moodle")
     fecha_str = self.datos_paso_1.get("fecha")
+    fecha_fin_str = self.datos_paso_1.get("fecha_fin", fecha_str)
     hora_str = self.datos_paso_1.get("hora")
     duracion_minutos = int(self.datos_paso_1.get("duracion", 60))
     
@@ -47,7 +50,9 @@ class ConfiguracionExamen(QWidget):
     # FechaExamen en Spring Boot espera: creacion, horaInicio, horaFin en formato YYYY-MM-DDTHH:MM:SS
     try:
       hora_inicio = datetime.strptime(f"{fecha_str} {hora_str}", "%Y-%m-%d %H:%M")
-      hora_fin = hora_inicio + timedelta(minutes=duracion_minutos)
+      # Para la hora fin, tomamos la fecha de finalización y le sumamos la duración a la hora de inicio original
+      hora_fin_base = datetime.strptime(f"{fecha_fin_str} {hora_str}", "%Y-%m-%d %H:%M")
+      hora_fin = hora_fin_base + timedelta(minutes=duracion_minutos)
       
       fechaExamen_payload = {
         "creacion": datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
@@ -61,8 +66,6 @@ class ConfiguracionExamen(QWidget):
     # 2. Llamada a la API para crear el examen básico
     exito_crear, respuesta_crear = cliente_api.crear_examen(
       profesor_id=profesor_id,
-      moodle_curso_id=grupo,
-      moodle_quiz_id=id_moodle,
       materia_codigo=materia,
       fechaExamen=fechaExamen_payload
     )

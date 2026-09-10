@@ -19,37 +19,54 @@ class CrearExamen(QWidget):
     
     # Valores por defecto
     self.entrada_fecha.setDate(QDate.currentDate())
-    self.entrada_hora.setTime(QTime.currentTime())
+    if hasattr(self, 'entrada_fecha_fin'):
+        self.entrada_fecha_fin.setDate(QDate.currentDate())
+    self._set_hora(QTime.currentTime())
     
+  def limpiar_formulario(self):
+    self.entrada_materia.clear()
+    self.entrada_fecha.setDate(QDate.currentDate())
+    if hasattr(self, 'entrada_fecha_fin'):
+        self.entrada_fecha_fin.setDate(QDate.currentDate())
+    self._set_hora(QTime.currentTime())
+    self.entrada_duracion.setValue(60)
+
   def emitir_cancelar(self):
     # Limpiar formulario
-    self.entrada_materia.clear()
-    self.entrada_moodle.clear()
-    self.entrada_grupo.setCurrentIndex(0)
-    self.entrada_fecha.setDate(QDate.currentDate())
-    self.entrada_hora.setTime(QTime.currentTime())
-    self.entrada_duracion.setValue(60)
-    
+    self.limpiar_formulario()
     self.cancelado.emit()
+
+  def _set_hora(self, qtime):
+    # Convertir a 12 horas y AM/PM
+    hour12 = qtime.hour() % 12
+    if hour12 == 0: hour12 = 12
+    self.entrada_hora_texto.setTime(QTime(hour12, qtime.minute()))
+    self.entrada_hora_ampm.setCurrentText("PM" if qtime.hour() >= 12 else "AM")
+
+  def _get_hora_string(self):
+    hora = self.entrada_hora_texto.time()
+    is_pm = self.entrada_hora_ampm.currentText() == "PM"
+    h = hora.hour()
+    if is_pm and h < 12: h += 12
+    elif not is_pm and h == 12: h = 0
+    return f"{h:02d}:{hora.minute():02d}"
 
   def procesar_siguiente(self):
     materia = self.entrada_materia.text().strip()
-    grupo = self.entrada_grupo.currentText()
-    id_moodle = self.entrada_moodle.text().strip()
     fecha = self.entrada_fecha.date().toString("yyyy-MM-dd")
-    hora = self.entrada_hora.time().toString("HH:mm")
+    fecha_fin = self.entrada_fecha_fin.date().toString("yyyy-MM-dd") if hasattr(self, 'entrada_fecha_fin') else fecha
+    hora = self._get_hora_string()
     duracion = self.entrada_duracion.value()
     
-    if not materia or not id_moodle or self.entrada_grupo.currentIndex() == 0:
-      QMessageBox.warning(self, "Campos Incompletos", "Por favor, complete todos los campos (Materia, Grupo e ID Cuestionario).")
+    if not materia:
+      QMessageBox.warning(self, "Campos Incompletos", "Por favor, ingrese el nombre de la materia.")
       return
       
     # Agrupar los datos en un diccionario para mandarlos al Paso 2
     datos_examen = {
       "materia": materia,
-      "grupo": grupo,
-      "id_moodle": id_moodle,
       "fecha": fecha,
+      "fecha_fin": fecha_fin,
       "hora": hora,
       "duracion": duracion
     }

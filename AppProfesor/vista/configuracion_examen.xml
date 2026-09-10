@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <ui version="4.0">
  <class>ConfiguracionExamen</class>
  <widget class="QWidget" name="ConfiguracionExamen">
@@ -24,7 +24,7 @@
    <property name="rightMargin"><number>40</number></property>
    <property name="bottomMargin"><number>30</number></property>
    
-   <!-- TÍTULOS -->
+   
    <item>
     <widget class="QLabel" name="titulo_principal">
     <property name="text"><string>Ajustes de Supervisión IA</string></property>
@@ -43,12 +43,12 @@
     </widget>
    </item>
 
-   <!-- TOGGLES -->
+   
    <item>
     <layout class="QVBoxLayout" name="vl_toggles">
     <property name="spacing"><number>15</number></property>
     
-    <!-- Facial -->
+    
     <item>
      <layout class="QHBoxLayout" name="hl_facial">
      <item>
@@ -57,9 +57,9 @@
       <item><widget class="QLabel" name="lbl_facial_desc"><property name="minimumHeight"><number>25</number></property><property name="text"><string>Verifica continuamente la identidad del estudiante durante la sesión.</string></property></widget></item>
       </layout>
      </item>
-     <item>
+     <item><spacer name="spacer_hl_facial"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item><item>
       <widget class="QCheckBox" name="chk_facial">
-      <property name="text"><string/></property>
+      <property name="text"><string /></property>
       <property name="checked"><bool>true</bool></property>
       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
       </widget>
@@ -67,7 +67,7 @@
      </layout>
     </item>
 
-    <!-- Objetos -->
+    
     <item>
      <layout class="QHBoxLayout" name="hl_objetos">
      <item>
@@ -76,9 +76,9 @@
       <item><widget class="QLabel" name="lbl_objetos_desc"><property name="minimumHeight"><number>25</number></property><property name="text"><string>Identifica teléfonos, tabletas o material de consulta no autorizado.</string></property></widget></item>
       </layout>
      </item>
-     <item>
+     <item><spacer name="spacer_hl_objetos"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item><item>
       <widget class="QCheckBox" name="chk_objetos">
-      <property name="text"><string/></property>
+      <property name="text"><string /></property>
       <property name="checked"><bool>true</bool></property>
       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
       </widget>
@@ -86,7 +86,7 @@
      </layout>
     </item>
 
-    <!-- Audio -->
+    
     <item>
     <layout class="QHBoxLayout" name="hl_audio">
      <item>
@@ -95,9 +95,9 @@
       <item><widget class="QLabel" name="lbl_audio_desc"><property name="minimumHeight"><number>25</number></property><property name="text"><string>Monitorea ruidos sospechosos que puedan indicar asistencia externa.</string></property></widget></item>
       </layout>
      </item>
-     <item>
+     <item><spacer name="spacer_hl_audio"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item><item>
       <widget class="QCheckBox" name="chk_audio">
-      <property name="text"><string/></property>
+      <property name="text"><string /></property>
       <property name="checked"><bool>false</bool></property>
       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
       </widget>
@@ -113,9 +113,9 @@
       <item><widget class="QLabel" name="lbl_procesos_desc"><property name="minimumHeight"><number>25</number></property><property name="text"><string>Verifica que no se ejecuten aplicaciones no permitidas.</string></property></widget></item>
       </layout>
      </item>
-     <item>
+     <item><spacer name="spacer_hl_procesos"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item><item>
       <widget class="QCheckBox" name="chk_procesos">
-      <property name="text"><string/></property>
+      <property name="text"><string /></property>
       <property name="checked"><bool>true</bool></property>
       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
       </widget>
@@ -131,9 +131,9 @@
       <item><widget class="QLabel" name="lbl_teclado_desc"><property name="minimumHeight"><number>25</number></property><property name="text"><string>Detecta patrones inusuales o uso de combinaciones prohibidas (Alt+Tab, etc).</string></property></widget></item>
       </layout>
      </item>
-     <item>
+     <item><spacer name="spacer_hl_teclado"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item><item>
       <widget class="QCheckBox" name="chk_teclado">
-      <property name="text"><string/></property>
+      <property name="text"><string /></property>
       <property name="checked"><bool>true</bool></property>
       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
       </widget>
@@ -151,7 +151,7 @@
     </widget>
    </item>
 
-   <!-- REGLAS ESTRICTAS -->
+   
    <item>
     <widget class="QLabel" name="lbl_reglas_tit">
     <property name="text"><string>&lt;b&gt;Reglas Estrictas (Lista Blanca)&lt;/b&gt;</string></property>
@@ -229,7 +229,7 @@
     </widget>
    </item>
 
-   <!-- BOTONES -->
+   
    <item>
     <layout class="QHBoxLayout" name="layout_botones">
     <property name="topMargin"><number>10</number></property>
@@ -259,6 +259,6 @@
   </item>
  </layout>
  </widget>
- <resources/>
- <connections/>
+ <resources />
+ <connections />
 </ui>

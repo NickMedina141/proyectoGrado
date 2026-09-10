@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <ui version="4.0">
  <class>CrearExamen</class>
  <widget class="QWidget" name="CrearExamen">
@@ -24,7 +24,7 @@
    <property name="rightMargin"><number>40</number></property>
    <property name="bottomMargin"><number>30</number></property>
    
-   <!-- TÍTULO -->
+   
    <item>
     <widget class="QLabel" name="titulo_principal">
     <property name="text"><string>Nuevo Examen</string></property>
@@ -38,14 +38,14 @@
     </widget>
    </item>
 
-   <!-- FORMULARIO GRID -->
+   
    <item>
     <layout class="QGridLayout" name="grid_formulario">
     <property name="horizontalSpacing"><number>30</number></property>
     <property name="verticalSpacing"><number>25</number></property>
     
-    <!-- ROW 0: Materia, Grupo, ID Moodle -->
-    <item row="0" column="0">
+    
+    <item row="0" column="0" colspan="4">
      <layout class="QVBoxLayout" name="vl_materia">
      <property name="spacing"><number>8</number></property>
      <item><widget class="QLabel" name="lbl_materia"><property name="text"><string>Nombre de la Materia</string></property></widget></item>
@@ -53,30 +53,9 @@
      </layout>
     </item>
     
-    <item row="0" column="1">
-     <layout class="QVBoxLayout" name="vl_grupo">
-     <property name="spacing"><number>8</number></property>
-     <item><widget class="QLabel" name="lbl_grupo"><property name="text"><string>Grupo / Sección</string></property></widget></item>
-     <item>
-      <widget class="QComboBox" name="entrada_grupo">
-      <item><property name="text"><string>Seleccionar grupo...</string></property></item>
-      <item><property name="text"><string>Grupo 01</string></property></item>
-      <item><property name="text"><string>Grupo 02</string></property></item>
-      <item><property name="text"><string>Grupo 03</string></property></item>
-      </widget>
-     </item>
-     </layout>
-    </item>
-    
-    <item row="0" column="2">
-     <layout class="QVBoxLayout" name="vl_moodle">
-     <property name="spacing"><number>8</number></property>
-     <item><widget class="QLabel" name="lbl_moodle"><property name="text"><string>ID Cuestionario (Moodle)</string></property></widget></item>
-     <item><widget class="QLineEdit" name="entrada_moodle"><property name="placeholderText"><string>ID del sistema</string></property></widget></item>
-     </layout>
-    </item>
 
-    <!-- ROW 1: Fecha, Hora, Duración -->
+
+    
     <item row="1" column="0">
      <layout class="QVBoxLayout" name="vl_fecha">
      <property name="spacing"><number>8</number></property>
@@ -85,38 +64,76 @@
       <widget class="QDateEdit" name="entrada_fecha">
       <property name="calendarPopup"><bool>true</bool></property>
       <property name="displayFormat"><string>dd/MM/yyyy</string></property>
-      </widget>
-     </item>
-     </layout>
-    </item>
-    
-    <item row="1" column="1">
-     <layout class="QVBoxLayout" name="vl_hora">
-     <property name="spacing"><number>8</number></property>
-     <item><widget class="QLabel" name="lbl_hora"><property name="text"><string>Hora de Inicio</string></property></widget></item>
-     <item>
-      <widget class="QTimeEdit" name="entrada_hora">
-      <property name="displayFormat"><string>hh:mm AP</string></property>
-      </widget>
+      <property name="maximumSize"><size><width>150</width><height>16777215</height></size></property></widget>
      </item>
      </layout>
     </item>
     
     <item row="1" column="2">
-     <layout class="QVBoxLayout" name="vl_duracion">
+     <layout class="QVBoxLayout" name="vl_hora">
      <property name="spacing"><number>8</number></property>
-     <item><widget class="QLabel" name="lbl_duracion"><property name="text"><string>Duración (minutos)</string></property></widget></item>
-     <item>
-      <widget class="QSpinBox" name="entrada_duracion">
-      <property name="minimum"><number>1</number></property>
-      <property name="maximum"><number>300</number></property>
-      <property name="value"><number>60</number></property>
-      </widget>
-     </item>
+     <item><widget class="QLabel" name="lbl_hora"><property name="text"><string>Hora de Inicio</string></property></widget></item>
+       <item>
+        <layout class="QHBoxLayout" name="hl_hora">
+         <property name="spacing"><number>0</number></property>
+         <property name="leftMargin"><number>0</number></property>
+         <property name="topMargin"><number>0</number></property>
+         <property name="rightMargin"><number>0</number></property>
+         <property name="bottomMargin"><number>0</number></property>
+         <item>
+          <widget class="QTimeEdit" name="entrada_hora_texto">
+           <property name="displayFormat"><string>hh:mm</string></property>
+           <property name="buttonSymbols"><enum>QAbstractSpinBox::NoButtons</enum></property>
+           <property name="maximumSize"><size><width>90</width><height>16777215</height></size></property></widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="entrada_hora_ampm">
+           <item><property name="text"><string>AM</string></property></item>
+           <item><property name="text"><string>PM</string></property></item>
+          <property name="maximumSize"><size><width>80</width><height>16777215</height></size></property></widget>
+         </item>
+         </layout>
+       </item>
+       </layout>
+      </item>
+    
+    <item row="1" column="3">
+       <layout class="QVBoxLayout" name="vl_duracion">
+       <property name="spacing"><number>8</number></property>
+       <item><widget class="QLabel" name="lbl_duracion"><property name="text"><string>Duración 
+(minutos)</string></property></widget></item>
+       <item>
+        <layout class="QHBoxLayout" name="hl_duracion">
+         <property name="spacing"><number>0</number></property>
+         <property name="leftMargin"><number>0</number></property>
+         <property name="topMargin"><number>0</number></property>
+         <property name="rightMargin"><number>0</number></property>
+         <property name="bottomMargin"><number>0</number></property>
+         <item>
+          <widget class="QSpinBox" name="entrada_duracion">
+          <property name="minimum"><number>1</number></property>
+          <property name="maximum"><number>300</number></property>
+          <property name="value"><number>60</number></property>
+          <property name="buttonSymbols"><enum>QAbstractSpinBox::NoButtons</enum></property>
+          <property name="maximumSize"><size><width>100</width><height>16777215</height></size></property></widget>
+         </item>
+         </layout>
+       </item>
      </layout>
     </item>
 
-    </layout>
+    <item row="1" column="1">
+       <layout class="QVBoxLayout" name="vl_fecha_fin">
+       <property name="spacing"><number>8</number></property>
+       <item><widget class="QLabel" name="lbl_fecha_fin"><property name="text"><string>Fecha Fin</string></property></widget></item>
+       <item>
+        <widget class="QDateEdit" name="entrada_fecha_fin">
+        <property name="calendarPopup"><bool>true</bool></property>
+        <property name="displayFormat"><string>dd/MM/yyyy</string></property>
+        <property name="maximumSize"><size><width>150</width><height>16777215</height></size></property></widget>
+       </item>
+       </layout>
+      </item></layout>
    </item>
 
    <item>
@@ -133,7 +150,7 @@
     </widget>
    </item>
 
-   <!-- BOTONES -->
+   
    <item>
     <layout class="QHBoxLayout" name="layout_botones">
     <property name="topMargin"><number>10</number></property>
@@ -163,6 +180,6 @@
   </item>
  </layout>
  </widget>
- <resources/>
- <connections/>
+ <resources />
+ <connections />
 </ui>

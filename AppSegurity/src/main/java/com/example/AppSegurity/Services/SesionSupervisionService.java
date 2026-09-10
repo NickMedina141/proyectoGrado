@@ -58,6 +58,20 @@ public class SesionSupervisionService {
             examen.getControlAcceso().getEstadoPin() != com.example.AppSegurity.Enums.Estado_pin.ACTIVO) {
             throw new RuntimeException("El examen no está activo en este momento (Cerrado por el profesor)");
         }
+        
+        // Validación estricta de tiempo
+        if (examen.getFechaExamen() != null) {
+            java.time.LocalDateTime ahora = java.time.LocalDateTime.now();
+            java.time.LocalDateTime horaInicio = examen.getFechaExamen().getHoraInicio();
+            java.time.LocalDateTime horaFin = examen.getFechaExamen().getHoraFin();
+            
+            if (horaInicio != null && ahora.isBefore(horaInicio)) {
+                throw new RuntimeException("El examen aún no ha comenzado. Inicia a las " + horaInicio.toString());
+            }
+            if (horaFin != null && ahora.isAfter(horaFin)) {
+                throw new RuntimeException("El examen ya ha finalizado. Terminó a las " + horaFin.toString());
+            }
+        }
 
         //Validamos que el estudiante tenga la materia inscrita
         Boolean esta_inscrito = false;
@@ -110,14 +124,21 @@ public class SesionSupervisionService {
                         webSocketMessagingTemplate.convertAndSend("/topic/alertas/" + s.getExamenId(), evento);
                     } catch (Exception e) {}
                     return s; // Reutiliza la sesión si ya estaba adentro
-                } else if (s.getEstadoSesion() == EstadoSesion.FINALIZADA) {
+                } else if (s.getEstadoSesion() == EstadoSesion.FINALIZADA || s.getEstadoSesion() == EstadoSesion.ANULADA) {
                     intentosCompletados++;
+                    // Si fue anulada por fraude, bloqueamos el acceso permanentemente para este examen
+                    if (s.getEstadoSesion() == EstadoSesion.ANULADA) {
+                        intentosCompletados += 999;
+                    }
                 }
             }
         }
         
         // --- NUEVAS VALIDACIONES: REINTENTOS ---
         if (examen.getConfiguracionExamen() != null && examen.getConfiguracionExamen().getPermitirReintentos() != null) {
+             if (intentosCompletados >= 999) {
+                 throw new RuntimeException("Acceso bloqueado: Tienes un intento previo marcado como FRAUDE (Anulado).");
+             }
              if (intentosCompletados >= examen.getConfiguracionExamen().getPermitirReintentos()) {
                  throw new RuntimeException("Has alcanzado el límite máximo de intentos (" + examen.getConfiguracionExamen().getPermitirReintentos() + ").");
              }

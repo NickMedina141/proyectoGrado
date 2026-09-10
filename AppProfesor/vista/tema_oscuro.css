@@ -191,6 +191,17 @@ QPushButton#btn_ap_1:hover, QPushButton#btn_ap_2:hover, QPushButton#btn_ap_3:hov
 
 /* PANEL DE APELACIONES (DARK MODE) */
 QTableWidget#tabla_apelaciones { border: 1px solid #334155; border-radius: 0px; background-color: #1E293B; }
+
+QPushButton#btn_pag_prev, QPushButton#btn_pag_next {
+    background-color: #1E293B; color: #F1F5F9; border: 1px solid #334155; border-radius: 0px; font-weight: bold;
+}
+QPushButton#btn_pag_prev:hover, QPushButton#btn_pag_next:hover {
+    background-color: #334155;
+}
+QPushButton#btn_pag_prev:disabled, QPushButton#btn_pag_next:disabled {
+    background-color: #0F172A; color: #475569; border: 1px solid #1E293B;
+}
+QLabel#lbl_paginacion { color: #F1F5F9; font-weight: bold; }
 QHeaderView::section { background-color: #0F172A; font-weight: bold; padding: 10px; border: none; border-bottom: 1px solid #334155; color: #F1F5F9; }
 QTableWidget#tabla_apelaciones::item { border-bottom: 1px solid #334155; padding: 10px; color: #F1F5F9; }
 QTableWidget#tabla_apelaciones::item:selected { background-color: #334155; color: #1E8449; }

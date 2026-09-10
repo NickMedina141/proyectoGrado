@@ -9,10 +9,18 @@ import java.util.Map;
 @Controller
 public class WebSocketController {
 
+    @org.springframework.beans.factory.annotation.Autowired
+    private com.example.AppSegurity.Repositorys.SesionSupervisionRepository sesionSupervisionRepository;
+
     @MessageMapping("/comando/{sesionId}")
     @SendTo("/topic/comandos/{sesionId}")
     public Map<String, Object> reenviarComando(@DestinationVariable String sesionId, Map<String, Object> comando) {
-        // Simplemente reenviamos el comando tal cual al tópico del estudiante
+        if (comando != null && "FRAUDE".equals(comando.get("comando"))) {
+            sesionSupervisionRepository.findById(sesionId).ifPresent(sesion -> {
+                sesion.setEstadoSesion(com.example.AppSegurity.Enums.EstadoSesion.ANULADA);
+                sesionSupervisionRepository.save(sesion);
+            });
+        }
         return comando;
     }
 }

@@ -20,8 +20,6 @@ public class Examen {
     @Id
     private String codigoExamen;
     private String profesorId;
-    private String moodleCursoId; 
-    private String moodleQuizId;
     private String materiaCodigo;
     private ControlAcceso controlAcceso;
     private FechaExamen fechaExamen;
@@ -34,11 +32,9 @@ public class Examen {
     
     //Constructor con parametros
 
-    public Examen(String codigoExamen, String profesorId, String moodleCursoId, String moodleQuizId, String materiaCodigo, ControlAcceso controlAcceso, FechaExamen fechaExamen, ConfiguracionExamen configuracionExamen) {
+    public Examen(String codigoExamen, String profesorId, String materiaCodigo, ControlAcceso controlAcceso, FechaExamen fechaExamen, ConfiguracionExamen configuracionExamen) {
         this.codigoExamen = codigoExamen;
         this.profesorId = profesorId;
-        this.moodleCursoId = moodleCursoId;
-        this.moodleQuizId = moodleQuizId;
         this.materiaCodigo = materiaCodigo;
         this.controlAcceso = controlAcceso;
         this.fechaExamen = fechaExamen;

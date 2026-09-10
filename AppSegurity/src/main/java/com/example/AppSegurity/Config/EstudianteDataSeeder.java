@@ -131,8 +131,7 @@ public class EstudianteDataSeeder implements CommandLineRunner {
             Examen ex = examenRepository.findById(codigoEx).orElse(new Examen());
             ex.setCodigoExamen(codigoEx);
             ex.setProfesorId(profId); // FORZAMOS que se actualice al correo correcto
-            ex.setMoodleCursoId("CURSO-" + (500 + i));
-            ex.setMoodleQuizId("QUIZ-" + (500 + i));
+
             ex.setMateriaCodigo(codigosMateria[i]);
             
             if (ex.getControlAcceso() == null) {
